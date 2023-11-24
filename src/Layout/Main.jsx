@@ -5,7 +5,7 @@ import Footer from "../pages/ShearPage/Footer/Footer";
 
 const Main = () => {
     return (
-        <div>
+        <div className=" w-11/12 mx-auto bg-slate-200">
             <Navbar />
             <div className='pt-24 min-h-[calc(100vh-98px)]'>
                 <Outlet />
