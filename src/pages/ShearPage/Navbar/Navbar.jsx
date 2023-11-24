@@ -4,6 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 
 
 const Navbar = () => {
+    
     const { user, logOut } = useAuth()
     const [theme, setTheme] = useState('light');
     const list = <>

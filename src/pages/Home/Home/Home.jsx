@@ -1,9 +1,13 @@
 
+import Swipers from "../Swiper/Swipers";
+import Review from "../Testimonial/Review";
+
 
 const Home = () => {
     return (
         <div >
-            <h1>This is HOme route</h1>
+           <Swipers />
+           <Review />
         </div>
     );
 };
