@@ -9,7 +9,7 @@ import sw1 from '../../../assets/home/slide1.jpg'
 
 
 const Swipers = () => {
-    return (
+    return (            
         <>
             <Swiper pagination={true} modules={[Pagination]} className="mySwiper">
                 <SwiperSlide><img src={sw1} alt="" /></SwiperSlide>
