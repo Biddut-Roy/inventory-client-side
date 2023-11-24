@@ -1,17 +1,19 @@
-import { useContext } from "react";
+
 import { useForm } from "react-hook-form"
-import { AuthContext } from "../../Authprovider/Authprovider";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import Swal from "sweetalert2";
+
 import GoogleLogin from "./Social Login/GoogleLogin";
 import usePublicAxios from "../../Hooks/usePublicAxios";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const Register = () => {
     const publicAxios = usePublicAxios()
     const navigate = useNavigate()
-    const { createUser, userUpdateProfile } = useContext(AuthContext)
+    const { createUser, userUpdateProfile } = useAuth()
     const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
     const {
         register,
@@ -24,16 +26,20 @@ const Register = () => {
         console.log(data?.email, data?.password, data?.firstName, data?.image);
 
         const imgFile = { image : data.image[0]}
-
-        createUser(data?.email, data?.password)
+        console.log(imgFile);
+        const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
+            headers: { "content-type": "multipart/form-data" }
+        })
+        if (res.data.success){
+            createUser(data?.email, data?.password)
             .then(() => {
-                userUpdateProfile(data?.firstName, data?.photo)
+                userUpdateProfile(data?.firstName, res.data?.data?.display_url)
                     .then(() => {
                         const userData = {
                             email: data?.email,
                             name: data?.firstName,
                         }
-                        publicAxios.post('/api/users' , userData)
+                        publicAxios.post('' , userData)
                             .then(res => {
                                 if (res.data.insertedId) {
                                     reset()
@@ -42,17 +48,17 @@ const Register = () => {
                                         title: "registered successfully ",
                                         showClass: {
                                             popup: `
-                            animate__animated
-                            animate__fadeInUp
-                            animate__faster
-                          `
+                                                animate__animated
+                                                animate__fadeInUp
+                                                animate__faster
+                                            `
                                         },
                                         hideClass: {
                                             popup: `
-                            animate__animated
-                            animate__fadeOutDown
-                            animate__faster
-                          `
+                                            animate__animated
+                                            animate__fadeOutDown
+                                            animate__faster
+                                        `
                                         }
                                     });
 
@@ -65,13 +71,15 @@ const Register = () => {
             .catch((error) => {
                 console.log(error.message);
             });
+        }
+       
     }
 
 
     return (
         <>
             <Helmet>
-                <title>BISTRO || REGISTER</title>
+                <title>ELS || REGISTER</title>
                 <link rel="canonical" />
             </Helmet>
             <div className="hero min-h-screen w-11/12 mx-auto bg-base-200">
@@ -123,7 +131,7 @@ const Register = () => {
 
                             </div>
                             <div className="form-control mt-6">
-                                <input type="submit" className="btn btn-success" value="Register" />
+                                <input type="submit" className="btn btn-primary bg-blue-800 " value="Register" />
                             </div>
                             <p>Already have a account. Please <Link to={"/login"}><span className=" text-blue-500">Login</span></Link></p>
                             <GoogleLogin></GoogleLogin>
@@ -135,4 +143,4 @@ const Register = () => {
     );
 };
 
-export default Register;
+export default Register ;

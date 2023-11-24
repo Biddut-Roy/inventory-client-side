@@ -10,9 +10,9 @@ const Navbar = () => {
         <li> <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Register</NavLink> </li>
         <li> <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/allBook"}>Create-Store</NavLink> </li>
-        <li> <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/borrowed"}>Watch Demo</NavLink>  </li>
+            isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/createShop"}>Create-Store</NavLink> </li>
+        <li onClick={()=> window.open('https://www.youtube.com/watch?v=4W-exU8greU', '_blank')}> <NavLink className={({ isActive, isPending }) =>
+            isPending ? "pending" : isActive ? "" : ""}  >Watch Demo</NavLink>  </li>
 
     </>
 
@@ -30,7 +30,7 @@ const Navbar = () => {
 
 
     return (
-        <div className="navbar bg-slate-400 border-solid border-b-2 border-black mx-auto md:w-11/12 lg:w-full">
+        <div className="navbar bg-slate-400 text-black border-solid border-b-2 border-black mx-auto md:w-11/12 lg:w-full">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
