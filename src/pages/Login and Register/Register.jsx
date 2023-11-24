@@ -23,13 +23,12 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        console.log(data?.email, data?.password, data?.firstName, data?.image);
-
         const imgFile = { image : data.image[0]}
         console.log(imgFile);
         const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
             headers: { "content-type": "multipart/form-data" }
         })
+        console.log(res.data);
         if (res.data.success){
             createUser(data?.email, data?.password)
             .then(() => {
@@ -39,9 +38,10 @@ const Register = () => {
                             email: data?.email,
                             name: data?.firstName,
                         }
-                        publicAxios.post('' , userData)
+                        publicAxios.post('/users' , userData)
                             .then(res => {
-                                if (res.data.insertedId) {
+                                console.log(res.data);
+                                if (res.data._id) {
                                     reset()
                                     navigate("/")
                                     Swal.fire({
@@ -79,7 +79,7 @@ const Register = () => {
     return (
         <>
             <Helmet>
-                <title>ELS || REGISTER</title>
+                <title>IMS || REGISTER</title>
                 <link rel="canonical" />
             </Helmet>
             <div className="hero min-h-screen w-11/12 mx-auto bg-base-200">

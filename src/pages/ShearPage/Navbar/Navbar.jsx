@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-// import Swal from "sweetalert2";
+import useAuth from "../../../Hooks/useAuth";
+
 
 const Navbar = () => {
+    const { user, logOut } = useAuth()
     const [theme, setTheme] = useState('light');
     const list = <>
         <li> <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/"}>Home</NavLink> </li>
-        <li> <NavLink className={({ isActive, isPending }) =>
-            isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Register</NavLink> </li>
+        {
+            user ?
+                <li> <NavLink className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Dashboard</NavLink> </li>
+                :
+                <li> <NavLink className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Register</NavLink> </li>
+        }
         <li> <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/createShop"}>Create-Store</NavLink> </li>
-        <li onClick={()=> window.open('https://www.youtube.com/watch?v=4W-exU8greU', '_blank')}> <NavLink className={({ isActive, isPending }) =>
+        <li onClick={() => window.open('https://www.youtube.com/watch?v=4W-exU8greU', '_blank')}> <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "" : ""}  >Watch Demo</NavLink>  </li>
 
     </>
@@ -40,7 +48,7 @@ const Navbar = () => {
                         {list}
                     </ul>
                 </div>
-                <Link to={'/'} className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="/logo.png" alt="Logo" /></Link>
+                <Link to={'/'} className="btn btn-ghost normal-case text-xl"><img className=" w-28 h-10" src="/Inventory.png" alt="Logo" /></Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu  menu-horizontal px-1">
@@ -49,18 +57,19 @@ const Navbar = () => {
             </div>
             <div className="navbar-end space-x-2">
                 <div className="hidden md:flex lg:flex">
-                    <p>displayName</p>
+                    <p>{user?.displayName}</p>
                 </div>
-                <div className=" w-10 h-10  ">
-                    {/* <img className=" rounded-full" src={user ? user.photoURL : ``} alt="" /> */}
+                <div className=" w-10 h-10 hidden md:flex lg:flex ">
+                    <img className=" rounded-full" src={user ? user?.photoURL : ``} alt="" />
                 </div>
-                <NavLink to={"/login"}><button className=" btn btn-primary bg-blue-800 btn-sm">Login</button></NavLink>
-                {/* {
+
+                {
                     user ?
-                        <NavLink ><button onClick={Out} className=" btn btn-neutral">Log out</button></NavLink>
+                        <NavLink ><button onClick={() => logOut()} className=" btn btn-neutral bg-blue-800  btn-sm">Log out</button></NavLink>
                         :
-                        
-                } */}
+                        <NavLink to={"/login"}><button className=" btn btn-primary bg-blue-800 btn-sm">Login</button></NavLink>
+
+                }
                 <label className="swap swap-rotate">
 
                     {/* this hidden checkbox controls the state */}

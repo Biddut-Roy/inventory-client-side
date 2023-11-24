@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login and Register/Login";
 import Register from "../pages/Login and Register/Register";
 import CreateShop from "../Component/CreateShop/CreateShop";
+import ErrorPage from "../Component/ErrorPage/ErrorPage";
 
 
 
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Main />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/",
@@ -28,7 +30,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/CreateShop",
-          element: <CreateShop></CreateShop> ,
+          element: <CreateShop />,
         },
 
       ],

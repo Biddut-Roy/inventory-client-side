@@ -63,7 +63,7 @@ const Login = () => {
     return (
         <>
          <Helmet>
-                <title>ELS || LOGIN</title>
+                <title>IMS || LOGIN</title>
                 <link rel="canonical" />
             </Helmet>
         <div className="hero min-h-screen w-11/12 mx-auto bg-base-200">
@@ -97,7 +97,7 @@ const Login = () => {
                         </div>
 
                         <div className="form-control mt-6">
-                            <input disabled={disable} type="submit" className="btn btn-success" value="Login" />
+                            <input disabled={disable} type="submit" className="btn btn-success bg-blue-800" value="Login" />
                         </div>
                         <p>You dont have a account. Please <Link to={"/register"}><span className=' text-blue-500'>Register</span></Link></p>
                         <GoogleLogin></GoogleLogin>

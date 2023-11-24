@@ -2,6 +2,7 @@ import usePublicAxios from "../../Hooks/usePublicAxios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const CreateShop = () => {
     const publicAxios = usePublicAxios()
@@ -36,7 +37,10 @@ const CreateShop = () => {
 
     return (
         <div className=" w-10/12 mx-auto">
-            
+             <Helmet>
+                <title>IMS || Shop</title>
+                <link rel="canonical" />
+            </Helmet>
             <form onSubmit={handleSubmit(onSubmit)}>
                  <div className=" flex gap-6">
                     <div className="form-control w-full max-w-xs">

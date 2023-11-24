@@ -15,11 +15,11 @@ const GoogleLogin = () => {
         googleEntry()
             .then((result) => {
                 const userData ={
-                    email: result.user?.email ,
-                    name: result.user?.displayName
+                    name: result.user?.displayName,
+                    email: result.user?.email 
 
                 }
-                publicAxios.post("" , userData)
+                publicAxios.post("/users" , userData)
                 .then((result) => {
                     console.log(result.data);
                     if (result.data) {
