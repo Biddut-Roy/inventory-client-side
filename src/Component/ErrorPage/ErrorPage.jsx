@@ -1,10 +1,12 @@
 
-import { useLocation, useNavigate} from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../Button/Button'
+import { useState } from 'react'
 
 const ErrorPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { user } = useState()
 
   return (
     <section className='bg-white '>
@@ -54,8 +56,14 @@ const ErrorPage = () => {
 
               <span>Go back</span>
             </button>
+            {
+              user ?
+                <Button label={'Home'} onClick={() => navigate('/')} />
+                :
+                <Button label={'Login'} onClick={() => navigate('/login')} />
+            }
+           
 
-            <Button label={'Home'} onClick={() => navigate('/')} />
           </div>
         </div>
       </div>
