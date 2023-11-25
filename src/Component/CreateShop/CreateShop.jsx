@@ -3,10 +3,12 @@ import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import useAuth from "../../Hooks/useAuth";
 
 const CreateShop = () => {
     const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
+    const {user} = useAuth()
     const IMG_UPDATE_KEY = import.meta.env.VITE_API_KEY_IMGBB
     const IMG_HOSTING_API = `https://api.imgbb.com/1/upload?key=${IMG_UPDATE_KEY}`
     const { register, handleSubmit, reset } = useForm()
@@ -19,6 +21,7 @@ const CreateShop = () => {
         })
         if (res.data.success) {
             const menuitem = {
+                user,
                 name: data.Name,
                 category: data.item,
                 recipe: data.description,

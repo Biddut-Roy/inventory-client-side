@@ -1,12 +1,12 @@
 
 import { useLocation, useNavigate } from 'react-router-dom'
 import Button from '../Button/Button'
-import { useState } from 'react'
+import useAuth from '../../Hooks/useAuth'
 
 const ErrorPage = () => {
   const navigate = useNavigate()
   const location = useLocation()
-  const { user } = useState()
+  const { user } = useAuth()
 
   return (
     <section className='bg-white '>

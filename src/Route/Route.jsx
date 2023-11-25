@@ -5,6 +5,7 @@ import Login from "../pages/Login and Register/Login";
 import Register from "../pages/Login and Register/Register";
 import CreateShop from "../Component/CreateShop/CreateShop";
 import ErrorPage from "../Component/ErrorPage/ErrorPage";
+import PrivateRoute from "./PrivateRoute";
 
 
 
@@ -30,7 +31,7 @@ const router = createBrowserRouter([
         },
         {
           path: "/CreateShop",
-          element: <CreateShop />,
+          element: <PrivateRoute><CreateShop /></PrivateRoute>,
         },
 
       ],

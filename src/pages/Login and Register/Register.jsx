@@ -43,7 +43,7 @@ const Register = () => {
                                 console.log(res.data);
                                 if (res.data._id) {
                                     reset()
-                                    navigate("/")
+                                    navigate("/CreateShop")
                                     Swal.fire({
                                         title: "registered successfully ",
                                         showClass: {

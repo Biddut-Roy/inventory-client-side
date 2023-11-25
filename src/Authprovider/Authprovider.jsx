@@ -44,8 +44,10 @@ const Authprovider = ({ children }) => {
                 email: user?.email,
             }
             if (auth.currentUser) {
+                console.log(userinfo);
                 axiosPublic.post('/jwt', userinfo)
                     .then(res => {
+                        console.log(res.data);
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token);
                             setLoading(false)
@@ -58,7 +60,6 @@ const Authprovider = ({ children }) => {
             }
             
         })
-        // localStorage.removeItem('access-token')
         return () => {
             unsubscribe();
         }
