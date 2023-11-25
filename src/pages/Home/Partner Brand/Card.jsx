@@ -1,17 +1,15 @@
-import AOS from 'aos'
-// import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import PropTypes from 'prop-types';
 
 const Card = ({ partner }) => {
     const { img } = partner;
 
-
-        AOS.init({
-            easing: 'ease-out-quart',
-            delay: 0,
-            duration: 750
-            })
-        AOS.refresh();
+    AOS.init({
+        easing: 'ease-out-quart',
+        delay: 0,
+        duration: 750
+        })
 
   
     return (
