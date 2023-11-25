@@ -4,7 +4,7 @@ import useAuth from "../../../Hooks/useAuth";
 
 
 const Navbar = () => {
-    
+
     const { user, logOut } = useAuth()
     const [theme, setTheme] = useState('light');
     const list = <>
@@ -13,7 +13,7 @@ const Navbar = () => {
         {
             user ?
                 <li> <NavLink className={({ isActive, isPending }) =>
-                    isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Dashboard</NavLink> </li>
+                    isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/dashboard"}>Dashboard</NavLink> </li>
                 :
                 <li> <NavLink className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/register"}>Register</NavLink> </li>
@@ -32,11 +32,6 @@ const Navbar = () => {
     useEffect(() => {
         document.querySelector('html').setAttribute('data-theme', theme);
     }, [theme]);
-
-
-
-
-
 
     return (
         <div className="navbar bg-slate-400 text-black border-solid border-b-2 border-black mx-auto md:w-11/12 lg:w-full">

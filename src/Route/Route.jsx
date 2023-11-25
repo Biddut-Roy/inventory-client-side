@@ -6,6 +6,8 @@ import Register from "../pages/Login and Register/Register";
 import CreateShop from "../Component/CreateShop/CreateShop";
 import ErrorPage from "../Component/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import Manager from "../Layout/Dashbord/ShopManager/Manager";
+import Added from "../Layout/Dashbord/ShopManager/Added/Added";
 
 
 
@@ -33,8 +35,17 @@ const router = createBrowserRouter([
           path: "/CreateShop",
           element: <PrivateRoute><CreateShop /></PrivateRoute>,
         },
-
       ],
+    },
+    {
+      path:"/dashboard" ,
+      element: <Manager />,
+      children: [
+        {
+          path: '/dashboard',
+          element: <Added />,
+        }
+      ]
     },
   ]);
 
