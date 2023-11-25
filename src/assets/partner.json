@@ -1,0 +1,53 @@
+[
+    {
+      "id": 1,
+      "name": "John Doe",
+      "img": "https://i.ibb.co/H25grwM/daraz-logo-latest.webp"
+    },
+    {
+      "id": 2,
+      "name": "Jane Smith",
+      "img": "https://i.ibb.co/dmTY6vw/LDV23-v2.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Bob Johnson",
+      "img": "https://i.ibb.co/p3HtLxZ/logo-50-years.png"
+    },
+    {
+      "id": 4,
+      "name": "Alice Williams",
+      "img": "https://i.ibb.co/kBqq9b7/maxresdefault.jpg"
+    },
+    {
+      "id": 5,
+      "name": "David Brown",
+      "img": "https://i.ibb.co/hH7SydF/myntra-1.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Emily Davis",
+      "img": "https://i.ibb.co/1TnRFsm/optimizer.webp"
+    },
+    {
+      "id": 7,
+      "name": "Alex Miller",
+      "img": "https://i.ibb.co/QQpC4V1/proinvnew.webp"
+    },
+    {
+      "id": 8,
+      "name": "Grace Wilson",
+      "img": "https://i.ibb.co/QYcTR50/q1-WIT-01-1024x768.png"
+    },
+    {
+      "id": 9,
+      "name": "Samuel Taylor",
+      "img": "https://i.ibb.co/5MhG1wW/ss.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Olivia Brown",
+      "img": "https://i.ibb.co/71MGfsj/sssss.jpg"
+    }
+  ]
+  
