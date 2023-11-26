@@ -14,7 +14,7 @@ const CreateShop = () => {
 
 
     const onSubmit = async (data) => {
-        console.log(data);
+
         const imagFile = { image: data.image[0] }
         const res = await publicAxios.post(IMG_IMG_HOSTING, imagFile, {
             headers: { "content-type": "multipart/form-data" }
@@ -26,12 +26,14 @@ const CreateShop = () => {
                 description: data.description,
                 location: data.location,
                 email: user?.email,
+                shop_name: data.Name,
                 name: user?.displayName,
                 image: res.data.data.display_url
             }
-            console.log(shopDetails);
+
             const menuRes = await SecureAxios.post('/shop-admin', shopDetails);
-            if (menuRes.data.insertedId) {
+            console.log(menuRes.data);
+            if (menuRes.data.storeId) {
                 Swal.fire("added a item to the menu");
                 reset();
             }

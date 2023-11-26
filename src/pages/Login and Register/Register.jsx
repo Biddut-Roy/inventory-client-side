@@ -28,7 +28,6 @@ const Register = () => {
         const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
             headers: { "content-type": "multipart/form-data" }
         })
-        console.log(res.data);
         if (res.data.success){
             createUser(data?.email, data?.password)
             .then(() => {
@@ -101,7 +100,7 @@ const Register = () => {
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Profile Photo Url</span>
+                                    <span className="label-text">Profile Photo</span>
                                 </label>
                                 <input type="file" {...register("image", { required: true })} className="input-bordered" />
                                 {errors.firstName?.type === "image" && (

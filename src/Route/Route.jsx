@@ -6,8 +6,9 @@ import Register from "../pages/Login and Register/Register";
 import CreateShop from "../Component/CreateShop/CreateShop";
 import ErrorPage from "../Component/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
-import Manager from "../Layout/Dashbord/ShopManager/Manager";
 import Added from "../Layout/Dashbord/ShopManager/Added/Added";
+import Dashboard from "../Layout/Dashbord/Dashboard";
+import AddItem from "../Layout/Dashbord/ShopManager/Added/AddItem";
 
 
 
@@ -37,14 +38,22 @@ const router = createBrowserRouter([
         },
       ],
     },
+    
+    // dashboard route
     {
       path:"/dashboard" ,
-      element: <Manager />,
+      element: <Dashboard />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: '/dashboard',
           element: <Added />,
-        }
+        },
+        {
+          path: '/dashboard/added',
+          element: <AddItem />,
+        },
+       
       ]
     },
   ]);

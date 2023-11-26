@@ -24,11 +24,7 @@ const GoogleLogin = () => {
                     email: result.user?.email
 
                 }
-                publicAxios.post("/users", userData)
-                    .then((result) => {
-                        console.log(result.data);
-                        if (result.data) {
-                            navigate(from, { replace: true });
+                navigate(from, { replace: true });
                             Swal.fire({
                                 title: `${pathName} successfully `,
                                 showClass: {
@@ -46,7 +42,12 @@ const GoogleLogin = () => {
                                   `
                                 }
                             });
-                        }
+                publicAxios.post("/users", userData)
+                    .then((result) => {
+                        console.log(result.data);
+                        // if (result.data) {
+                            
+                        // }
 
                     });
 
