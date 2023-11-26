@@ -4,6 +4,8 @@ import useAuth from "../../../../Hooks/useAuth";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 const Product = () => {
     const {user} = useAuth()
@@ -19,6 +21,37 @@ const Product = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     refetch()
+    const handelDelete = (id) =>{
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Delete this product",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                publicAxios.delete(`/delete-product/${id}`)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.deletedCount > 0) {
+                            toast.success('Product deleted successful')
+                            refetch()
+                            // publicAxios.patch()
+                            //     .then((res) => {
+                            //         console.log(res.data);
+                            //     })
+                            //     .catch(error => console.error(error));
+                        }
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+        });
+    }
+   
     return (
         <div className="overflow-x-auto text-black">
             <table className="table">
@@ -61,7 +94,7 @@ const Product = () => {
                             <Link to={`/dashboard/updateProduct/${product?._id}`}><button  className="btn btn-ghost btn-md text-2xl text-blue-700"><GrDocumentUpdate /></button></Link>
                         </th>
                         <th>
-                            <button className="btn btn-ghost btn-md  text-red-500 text-2xl "><MdOutlineDelete /></button>
+                            <button onClick={()=>handelDelete(product?._id)} className="btn btn-ghost btn-md  text-red-500 text-2xl "><MdOutlineDelete /></button>
                         </th>
                     </tr>
                    
