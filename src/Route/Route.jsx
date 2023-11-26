@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashbord/Dashboard";
 import AddItem from "../Layout/Dashbord/ShopManager/Added/AddItem";
 import Product from "../Layout/Dashbord/ShopManager/allProduct/Product";
 import Update from "../Layout/Dashbord/ShopManager/updateProduct/Update";
+import Product_Section from "../Layout/Dashbord/ShopManager/Sales-Collection/Product_Section";
 
 
 
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
           path: `/dashboard/updateProduct/:id`,
           loader:({params})=> fetch(`http://localhost:5000/dashboard/updateProduct/${params.id}`),
           element: <Update />,
+        },
+        {
+          path: '/dashboard/Collection',
+          element: <Product_Section />,
         },
        
       ]
