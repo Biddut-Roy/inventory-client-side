@@ -28,12 +28,12 @@ const Dashboard = () => {
                             //    </ul>
                             //    :
                             <ul className=" menu text-black">
-                                <li><NavLink to={'/dashboard/userHome'}>Shop Manager</NavLink></li>
-                                <li><NavLink to={'/dashboard/card'}>Shop card</NavLink></li>
-                                <li><NavLink to={'/dashboard'}>Add Product</NavLink></li>
+                                <li>Shop Managerk</li>
+                                <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
+                                <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
+                                <li><NavLink to={'/dashboard/Review'}>Sales-Collection</NavLink></li>
+                                <li><NavLink to={'/dashboard/history'}>Check-Out</NavLink></li>
                                 <li><NavLink to={'/dashboard/history'}>payment History</NavLink></li>
-                                <li><NavLink to={'/dashboard/Review'}>Add review</NavLink></li>
-                                <li><NavLink to={'/dashboard/booking'}>Booking</NavLink></li>
                             </ul>
                         }
 
@@ -61,13 +61,13 @@ const Dashboard = () => {
                         //    </ul>
                         //    :
                         <ul className=" menu text-black">
-                            <li><NavLink to={'/dashboard/userHome'}>Shop Manager</NavLink></li>
-                            <li><NavLink to={'/dashboard/card'}>All Product</NavLink></li>
-                            <li><NavLink to={'/dashboard'}>Add Product</NavLink></li>
+                            <li>Shop Managerk</li>
+                            <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
+                            <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
                             <li><NavLink to={'/dashboard/Review'}>Sales-Collection</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}>Check-Out</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}>payment History</NavLink></li>
-                           
+
                         </ul>
                     }
 

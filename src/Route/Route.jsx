@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import Added from "../Layout/Dashbord/ShopManager/Added/Added";
 import Dashboard from "../Layout/Dashbord/Dashboard";
 import AddItem from "../Layout/Dashbord/ShopManager/Added/AddItem";
+import Product from "../Layout/Dashbord/ShopManager/allProduct/Product";
+import Update from "../Layout/Dashbord/ShopManager/updateProduct/Update";
 
 
 
@@ -46,12 +48,21 @@ const router = createBrowserRouter([
       errorElement: <ErrorPage />,
       children: [
         {
-          path: '/dashboard',
+          path: '/dashboard/add',
           element: <Added />,
         },
         {
           path: '/dashboard/added',
           element: <AddItem />,
+        },
+        {
+          path: '/dashboard/product',
+          element: <Product />,
+        },
+        {
+          path: `/dashboard/updateProduct/:id`,
+          loader:({params})=> fetch(`http://localhost:5000/dashboard/updateProduct/${params.id}`),
+          element: <Update />,
         },
        
       ]

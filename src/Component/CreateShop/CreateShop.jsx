@@ -33,7 +33,7 @@ const CreateShop = () => {
 
             const menuRes = await SecureAxios.post('/shop-admin', shopDetails);
             console.log(menuRes.data);
-            if (menuRes.data.storeId) {
+            if (menuRes.data._id) {
                 Swal.fire("added a item to the menu");
                 reset();
             }
