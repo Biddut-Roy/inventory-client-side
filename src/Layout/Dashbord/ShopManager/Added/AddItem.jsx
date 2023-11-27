@@ -24,7 +24,6 @@ const AddItem = () => {
             return res.data
         }
     })
-    console.log(store?._id);
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
 
@@ -37,7 +36,6 @@ const AddItem = () => {
         const currentMonth = currentDate.getMonth() + 1;
         const currentDay = currentDate.getDate();
         const currentDateStr = `${currentYear}/${currentMonth}/${currentDay}`;
-        console.log({SellingPrice , currentDateStr});
         const imgFile = { image: data.image[0] }
         const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
             headers: { "content-type": "multipart/form-data" }
