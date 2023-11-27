@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import Swal from "sweetalert2";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Product_Section = () => {
@@ -20,6 +20,7 @@ const Product_Section = () => {
     refetch()
 
     const handelCheckOut = (id) => {
+        
         const checkOutData = {
             mainId: id
         }
@@ -27,27 +28,9 @@ const Product_Section = () => {
         publicAxios.post('/checkOut-card', checkOutData)
             .then(res => {
                 console.log(res.data);
-                if (res.data._id) {
-                 
-   
-                    Swal.fire({
-                        title: "Your Product update information update ",
-                        showclassName: {
-                            popup: `
-                                                animate__animated
-                                                animate__fadeInUp
-                                                animate__faster
-                                            `
-                        },
-                        hideclassName: {
-                            popup: `
-                                            animate__animated
-                                            animate__fadeOutDown
-                                            animate__faster
-                                        `
-                        }
-                    });
 
+                if (res.data._id) {
+                    toast.success('add product successful')
                 }
             })
     }
@@ -67,39 +50,42 @@ const Product_Section = () => {
                 </tr>
             </thead>
             {
-                products.map(product =><tbody key={product._id} className="block md:table-row-group text-black">
-                <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">ID:</span>{product._id}</td>
-                    
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
+                products.map(product => <tbody key={product._id} className="block md:table-row-group text-black">
+                    <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">ID:</span>{product._id}</td>
+
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
                         </span><div className="flex items-center">
-                            <div className="avatar">
-                                <div className="mask mask-squircle w-12 h-12">
-                                    <img src={product?.photo} alt="Avatar Tailwind CSS Component" />
+                                <div className="avatar">
+                                    <div className="mask mask-squircle w-12 h-12">
+                                        <img src={product?.photo} alt="Avatar Tailwind CSS Component" />
+                                    </div>
                                 </div>
-                            </div>
-                        </div></td>
+                            </div></td>
 
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span>{product?.product_name}</td>
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span>{product?.product_name}</td>
 
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Quantity</span>{product.quantity}</td>
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Quantity</span>{product.quantity}</td>
 
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Discount</span>{product.discount} %</td>
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Discount</span>{product.discount} %</td>
 
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Selling_price</span>Price: {product.sellingPrice}</td>
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Selling_price</span>Price: {product.sellingPrice}</td>
 
-                    <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
-                        <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                        <button onClick={()=>handelCheckOut(product?._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
-                    </td>
-                </tr>
-
+                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell">
+                            <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
+                            <button onClick={() => handelCheckOut(product?._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
+                        </td>
+                    </tr>
 
 
-       
-            </tbody>)
+                    <Toaster
+                        position="top-center"
+                        reverseOrder={false}
+                    />
+
+                </tbody>)
             }
-            
+
         </table>
     );
 };

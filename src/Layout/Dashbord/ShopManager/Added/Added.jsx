@@ -19,7 +19,7 @@ const Added = () => {
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
     refetch()
-    console.log(data);
+
     return (
         <div >
             {

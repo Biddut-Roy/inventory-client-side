@@ -12,6 +12,9 @@ import AddItem from "../Layout/Dashbord/ShopManager/Added/AddItem";
 import Product from "../Layout/Dashbord/ShopManager/allProduct/Product";
 import Update from "../Layout/Dashbord/ShopManager/updateProduct/Update";
 import Product_Section from "../Layout/Dashbord/ShopManager/Sales-Collection/Product_Section";
+import CheckOut from "../Layout/Dashbord/ShopManager/checkOut/CheckOut";
+import Subscription from "../Layout/Dashbord/Subcribtion/Subscription";
+import Payment from "../Layout/Dashbord/Subcribtion/PAyment/Payment";
 
 
 
@@ -25,7 +28,7 @@ const router = createBrowserRouter([
       children: [
         {
           path: "/",
-          element: <Home></Home> ,
+          element: <Home /> ,
         },
         {
           path: "/login",
@@ -68,6 +71,18 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/Collection',
           element: <Product_Section />,
+        },
+        {
+          path: '/dashboard/checkOut',
+          element: <CheckOut />,
+        },
+        {
+          path: '/dashboard/subscription',
+          element: <Subscription />,
+        },
+        {
+          path: '/dashboard/subscription/:money',
+          element: <Payment /> ,
         },
        
       ]

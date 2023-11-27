@@ -28,12 +28,12 @@ const Dashboard = () => {
                             //    </ul>
                             //    :
                             <ul className=" menu text-black">
-                                <li>Shop Managerk</li>
-                                <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
-                                <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
-                                <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
-                                <li><NavLink to={'/dashboard/history'}>Check-Out</NavLink></li>
-                                <li><NavLink to={'/dashboard/history'}>payment History</NavLink></li>
+                               <li>Shop Manager</li>
+                            <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
+                            <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
+                            <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
+                            <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
+                            <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
                             </ul>
                         }
 
@@ -61,12 +61,12 @@ const Dashboard = () => {
                         //    </ul>
                         //    :
                         <ul className=" menu text-black">
-                            <li>Shop Managerk</li>
-                            <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
+                            <li className=" mb-3">Shop Manager</li>
+                            <li><NavLink  to={'/dashboard/add'}>Add Product</NavLink></li>
                             <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
                             <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
-                            <li><NavLink to={'/dashboard/history'}>Check-Out</NavLink></li>
-                            <li><NavLink to={'/dashboard/history'}>payment History</NavLink></li>
+                            <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
+                            <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
 
                         </ul>
                     }

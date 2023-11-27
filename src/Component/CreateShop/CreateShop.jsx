@@ -4,17 +4,18 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 const CreateShop = () => {
     const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
+    const navigate = useNavigate()
     const { user } = useAuth()
     const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
     const { register, handleSubmit, reset } = useForm()
 
 
     const onSubmit = async (data) => {
-
         const imagFile = { image: data.image[0] }
         const res = await publicAxios.post(IMG_IMG_HOSTING, imagFile, {
             headers: { "content-type": "multipart/form-data" }
@@ -32,10 +33,10 @@ const CreateShop = () => {
             }
 
             const menuRes = await SecureAxios.post('/shop-admin', shopDetails);
-            console.log(menuRes.data);
             if (menuRes.data._id) {
-                Swal.fire("added a item to the menu");
+                Swal.fire("Your Shop Created");
                 reset();
+                navigate('/dashboard')
             }
         }
     }
