@@ -61,7 +61,7 @@ const AddItem = () => {
                             .then(res => {
                                 if (res.data._id) {
                                     reset()
-                                    navigate("/dashboard")
+                                    navigate("/dashboard/add")
                                     Swal.fire({
                                         title: "Your Product has been added successfully ",
                                         showClass: {

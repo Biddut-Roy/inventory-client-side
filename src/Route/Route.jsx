@@ -15,6 +15,7 @@ import Product_Section from "../Layout/Dashbord/ShopManager/Sales-Collection/Pro
 import CheckOut from "../Layout/Dashbord/ShopManager/checkOut/CheckOut";
 import Subscription from "../Layout/Dashbord/Subcribtion/Subscription";
 import Payment from "../Layout/Dashbord/Subcribtion/PAyment/Payment";
+import Summary from "../Layout/Dashbord/ShopManager/Sales Summary/Summary";
 
 
 
@@ -83,6 +84,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/subscription/:money',
           element: <Payment /> ,
+        },
+        {
+          path: '/dashboard/Summary',
+          element: <Summary /> ,
         },
        
       ]

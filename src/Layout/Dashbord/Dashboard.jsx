@@ -34,6 +34,7 @@ const Dashboard = () => {
                             <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
                             <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
                             <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
+                            <li><NavLink to={'/dashboard/Summary'}>Summary</NavLink></li>
                             </ul>
                         }
 
@@ -67,6 +68,7 @@ const Dashboard = () => {
                             <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
                             <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
                             <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
+                            <li><NavLink to={'/dashboard/Summary'}>Summary</NavLink></li>
 
                         </ul>
                     }

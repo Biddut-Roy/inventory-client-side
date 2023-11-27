@@ -34,7 +34,7 @@ const CheckOut = () => {
     }
 
     return (
-        <div>
+        <div className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
 
             <table className="min-w-full border-collapse block md:table">
                 <thead className="block md:table-header-group">
