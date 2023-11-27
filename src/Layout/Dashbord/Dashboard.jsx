@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
-
+    const  [isAdmin] = useAdmin()
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
+
     return (
         <>
             <label onClick={toggleSidebar} className="btn btn-circle swap swap-rotate md:hidden lg:hidden">
@@ -18,15 +20,15 @@ const Dashboard = () => {
                 <div className=" flex md:hidden lg:hidden">
                     <div className={isSidebarOpen ? "-ml-36 hidden" : " bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400 w-22 md:w-64 lg:w-64 min-h-screen bg-gray-300"}>
                         {
-
-                            //       <ul className=" menu text-black">
-                            //       <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
-                            //       <li><NavLink to={'/dashboard/AddItem'}>Add item</NavLink></li>
-                            //       <li><NavLink to={'/dashboard/manage'}>Manage Item</NavLink></li>
-                            //       <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
-                            //       <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
-                            //    </ul>
-                            //    :
+                            isAdmin?.isAdmin ?
+                                  <ul className=" menu text-black">
+                                  <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
+                                  <li><NavLink to={'/dashboard/manage'}>Manage Shop</NavLink></li>
+                                  <li><NavLink to={'/dashboard/item'}>Manage Item</NavLink></li>
+                                  <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
+                                  <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
+                               </ul>
+                               :
                             <ul className=" menu text-black">
                                <li>Shop Manager</li>
                             <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
@@ -52,15 +54,15 @@ const Dashboard = () => {
 
                 <div className=" hidden md:flex md:flex-col lg:flex lg:flex-col bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-400 w-64 min-h-screen bg-gray-300">
                     {
-
-                        //       <ul className=" menu text-black">
-                        //       <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
-                        //       <li><NavLink to={'/dashboard/AddItem'}>Add item</NavLink></li>
-                        //       <li><NavLink to={'/dashboard/manage'}>Manage Item</NavLink></li>
-                        //       <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
-                        //       <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
-                        //    </ul>
-                        //    :
+                        isAdmin?.isAdmin ?
+                              <ul className=" menu text-black">
+                              <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
+                              <li><NavLink to={'/dashboard/manage'}>Manage Shop</NavLink></li>
+                              <li><NavLink to={'/dashboard/item'}>Manage Item</NavLink></li>
+                              <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
+                              <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
+                           </ul>
+                           :
                         <ul className=" menu text-black">
                             <li className=" mb-3">Shop Manager</li>
                             <li><NavLink  to={'/dashboard/add'}>Add Product</NavLink></li>
