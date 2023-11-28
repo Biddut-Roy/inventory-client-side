@@ -5,11 +5,16 @@ import Banner from "../Banner/Banner";
 import MapBox from "../Map/Mapbox";
 import Partner from "../Partner Brand/Partner";
 import Review from "../Testimonial/Review";
+import { Helmet } from "react-helmet-async";
 
 
 const Home = () => {
     return (
         <div >
+            <Helmet>
+                <title>IMS || Home</title>
+                <link rel="canonical" />
+            </Helmet>
             <div className=" flex  m-2">
             <h1 className=" text-black my-5 font-bold">Notice: </h1>
             <Marquee>

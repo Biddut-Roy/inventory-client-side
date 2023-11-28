@@ -7,9 +7,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { PieChart, Pie,  Cell, ResponsiveContainer, Legend } from 'recharts';
 import moment from 'moment';
+import useADminData from "../../../../Hooks/useADminData";
+import { AiTwotoneNotification } from "react-icons/ai";
 
 
-const COLORS = ['#0088FE', '#FFBB28', '#FF8042'];
+const COLORE = ['#0088FE', '#FFBB28', '#FF8042'];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent}) => {
@@ -26,43 +28,32 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 
 
-const Summary = () => {
-    const { user } = useAuth()
+const Admin_Summary = () => {
     const publicAxios = usePublicAxios()
+    const {Admin} = useADminData();
     const [sell, setSell] = useState()
     const [currentPage, SetCurrentPage] = useState(0)
     const [itemLength, setItemLength] = useState(0)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await publicAxios.get(`/sell-data/${user?.email}?page=${currentPage}&size=${4}`);
+                const response = await publicAxios.get(`/all-shop-data?page=${currentPage}&size=${4}`);
                 const data = response.data;
-                setSell(data?.result)
+                setSell(data?.pagination)
                 setItemLength(data?.dataLength)
             } catch (error) {
                 console.error('Error fetching sell data:', error);
             }
         };
-
         fetchData();
-    }, [publicAxios, user?.email, currentPage])
-
-    const totalSell = sell?.reduce((acc, current) => {
-        const total = current.pay || 0;
-        return acc + total;
-    }, 0);
-
-    const totalCost = sell?.reduce((total, item) => {
-        const itemCost = item.cost || 0;
-        return total + itemCost;
-    }, 0);
-
-    const Profit = (totalSell - totalCost).toFixed(2);
+    }, [publicAxios , currentPage])
+    
+console.log(sell);
 
     const { isPending, error, refetch, data: products = [] } = useQuery({
-        queryKey: ['shop-products'],
+        queryKey: ['all-product'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/shop-products/${user?.email}`)
+            const res = await publicAxios.get('/all-product')
             return res.data
         }
     })
@@ -70,11 +61,17 @@ const Summary = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     refetch()
-    const totalInvestAmount = products?.reduce((total, item) => {
-        const saleAmount = item.saleCount * (item.cost * item.quantity);
-        return total + saleAmount;
+
+    const totalProduct = products?.reduce((total, item) => {
+        const allProduct = item.quantity || 0 ;
+        return total + allProduct;
     }, 0);
-console.log(sell);
+
+    const totalSealCount = products?.reduce((total, item) => {
+        const allSeal = item.saleCount || 0 ;
+        return total + allSeal;
+    }, 0);
+
     const count = itemLength;
     const itemPerPage = 4;
     const numberOfPage = Math.ceil(count / itemPerPage)
@@ -82,15 +79,15 @@ console.log(sell);
     const pages = [...Array(numberOfPage).keys()]
 
     const data = [
-        { name: 'Total Sale', value: totalSell },
-        { name: 'Total Invest', value: totalInvestAmount },
-        { name: 'Total Profit', value: Profit },
+        { name: 'Total Income', value: Admin?.user?.income},
+        { name: 'All Product', value: totalProduct },
+        { name: 'Total Sale', value: totalSealCount },
       ];
 
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
             <Helmet>
-                <title>IMS || Summary</title>
+                <title>IMS || Admin-Summary</title>
                 <link rel="canonical" />
             </Helmet>
             <div className="bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
@@ -98,8 +95,8 @@ console.log(sell);
 
                     <NavLink >
                         <div className="stat text-gray-700  border-2 bg-orange-300 rounded-lg">
-                            <div className="stat-title text-black" >Total Sale</div>
-                            <div className="stat-value">{totalSell} $</div>
+                            <div className="stat-title text-center text-black" >Total Income</div>
+                            <div className="stat-value text-center">{Admin?.user?.income} $</div>
 
                         </div>
                     </NavLink>
@@ -107,31 +104,33 @@ console.log(sell);
                     <NavLink >
                         <div className="stat text-gray-700 border-2 bg-orange-300 rounded-lg">
 
-                            <div className="stat-title text-black">Total Invest</div>
-                            <div className="stat-value">{totalInvestAmount} $</div>
+                            <div className="stat-title text-center text-black">Total Product</div>
+                            <div className="stat-value text-center">{totalProduct}</div>
 
                         </div>
                     </NavLink>
 
                     <NavLink >
                         <div className="stat text-gray-700 border-2 bg-orange-300 rounded-lg">
-                            <div className="stat-title text-black">Total Profit</div>
-                            <div className="stat-value">{Profit} $</div>
+                            <div className="stat-title text-center text-black">Total Sales</div>
+                            <div className="stat-value text-center">{totalSealCount} </div>
 
                         </div>
                     </NavLink>
 
                 </div>
                 {/* table */}
-                <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 w-11/12 mx-auto">
+                <div className=" flex flex-col w-11/12 mx-auto">
                     <div className="border-solid border-2">
                         <table className="min-w-full border-collapse block md:table ">
                             <thead className="block md:table-header-group">
                                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
 
                                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Name</th>
-                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Selling Date</th>
-                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Profit</th>
+                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Email</th>
+                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Shop Name</th>
+                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Roll</th>
+                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Promotion</th>
 
                                 </tr>
                             </thead>
@@ -140,13 +139,17 @@ console.log(sell);
                                 {
                                     sell?.map(item => <tr key={item._id} className="bg-blue-300 border border-grey-500 md:border-none block md:table-row">
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span>product?.product_name</td>
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name :</span>{item.name}</td>
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Date:</span>
-                                        {moment(item.date).format("DD : MMMM : YYYY")}
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Email :</span>
+                                        {item.email}
                                         </td>
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Profit :</span>{(item.pay - item.cost).toFixed(2)}</td>
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Shop Name: :</span>{item.shop_name || " "}</td>
+
+                                        <td className={ item?.roll == "admin" ? "p-2 font-bold md:border md:border-grey-500 bg-orange-600 block md:table-cell" : "p-2 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Roll :</span>{item?.roll || " "}</td>
+
+                                        <td  className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><button className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><AiTwotoneNotification /></button></td>
 
                                     </tr>)
                                 }
@@ -178,7 +181,7 @@ console.log(sell);
                                     dataKey="value"
                                 >
                                     {data.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                        <Cell key={`cell-${index}`} fill={COLORE[index % COLORE.length]} />
                                     ))}
                                 </Pie>
                                 <Legend />
@@ -192,7 +195,7 @@ console.log(sell);
     );
 };
 
-export default Summary;
+export default Admin_Summary ;
 
 
 

@@ -4,6 +4,7 @@ import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 
 const Product_Section = () => {
@@ -59,6 +60,10 @@ console.log(product);
     
     return (
         <div>
+            <Helmet>
+                <title>IMS || Sales</title>
+                <link rel="canonical" />
+            </Helmet>
             <form onSubmit={handelSearch} className=" m-5">
                 <input type="text" name="data" id="" />
                 <input className=" btn btn-sm bg-blue-600 " type="submit" value="Search" />

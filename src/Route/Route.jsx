@@ -17,6 +17,7 @@ import Subscription from "../Layout/Dashbord/Subcribtion/Subscription";
 import Payment from "../Layout/Dashbord/Subcribtion/PAyment/Payment";
 import Summary from "../Layout/Dashbord/ShopManager/Sales Summary/Summary";
 import Manage from "../Layout/Dashbord/Admin/Manage User/Manage";
+import Admin_Summary from "../Layout/Dashbord/Admin/Summary/Admin_Summary";
 
 
 
@@ -95,6 +96,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/manage',
           element: <Manage /> ,
+        },
+        {
+          path: '/dashboard/admin/Summary',
+          element: <Admin_Summary /> ,
         },
        
       ]

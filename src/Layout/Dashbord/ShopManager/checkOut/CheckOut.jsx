@@ -5,6 +5,7 @@ import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -63,6 +64,10 @@ const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
 
     return (
         <div id="pdf-content" className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
+            <Helmet>
+                <title>IMS || CheckOut</title>
+                <link rel="canonical" />
+            </Helmet>
             <table id="my-table" className="min-w-full border-collapse block md:table">
                 <thead className="block md:table-header-group">
                     <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">

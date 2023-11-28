@@ -22,9 +22,9 @@ const Dashboard = () => {
                         {
                             isAdmin?.isAdmin ?
                                   <ul className=" menu text-black">
-                                  <li><Link to={'/dashboard/Admin'}>Admin home</Link></li>
+                                  <li><Link>Admin home</Link></li>
                                   <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
-                                  <li><Link to={'/dashboard/item'}>Manage Item</Link></li>
+                                  <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
                                   <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
                                   <li><Link to={'/dashboard/Users'}>All user</Link></li>
                                </ul>
@@ -56,9 +56,9 @@ const Dashboard = () => {
                     {
                         isAdmin?.isAdmin ?
                               <ul className=" menu text-black">
-                              <li><Link to={'/dashboard/Admin'}>Admin home</Link></li>
+                                <li><Link>Admin home</Link></li>
                               <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
-                              <li><Link to={'/dashboard/item'}>Manage Item</Link></li>
+                              <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
                               <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
                               <li><Link to={'/dashboard/Users'}>All user</Link></li>
                            </ul>

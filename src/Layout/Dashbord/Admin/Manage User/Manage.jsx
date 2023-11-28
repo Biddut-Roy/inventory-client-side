@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { AiTwotoneNotification } from "react-icons/ai";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 
 const Manage = () => {
@@ -10,7 +11,7 @@ const Manage = () => {
         queryKey: ['all-store'],
         queryFn: async () => {
             const res = await publicAxios.get('/all-shop-data')
-            return res.data
+            return res.data?.result
         }
     })
     if (isPending) return 'Loading...'
@@ -30,7 +31,10 @@ const Manage = () => {
     // }
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
-
+            <Helmet>
+                <title>IMS || shob_Manage</title>
+                <link rel="canonical" />
+            </Helmet>
             <table className="min-w-full border-collapse block md:table">
                 <thead className="block md:table-header-group">
                     <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">

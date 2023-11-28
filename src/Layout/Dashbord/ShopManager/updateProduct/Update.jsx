@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -69,6 +70,10 @@ const Update = () => {
     }
     return (
         <div>
+            <Helmet>
+                <title>IMS || Update</title>
+                <link rel="canonical" />
+            </Helmet>
             <h1 className=" text-2xl font-bold text-blue-700 mt-10 text-center">Update This Product </h1>
             <form onSubmit={handleSubmit(onSubmit)} className=" ">
                 <div className="w-10/12 md:w-10/12 lg:w-10/12 my-14 mx-auto grid grid-cols-2 gap-5">

@@ -6,12 +6,13 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 
 const Product = () => {
     const { user } = useAuth()
     const publicAxios = usePublicAxios()
- 
+
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-products'],
         queryFn: async () => {
@@ -53,7 +54,10 @@ const Product = () => {
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
-
+            <Helmet>
+                <title>IMS || Product</title>
+                <link rel="canonical" />
+            </Helmet>
             <table className="min-w-full border-collapse block md:table">
                 <thead className="block md:table-header-group">
                     <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
