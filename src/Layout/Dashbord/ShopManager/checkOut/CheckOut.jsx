@@ -10,10 +10,10 @@ import toast, { Toaster } from "react-hot-toast";
 const CheckOut = () => {
     const { user } = useAuth()
     const publicAxios = usePublicAxios()
-    const { isPending, error, refetch, data: products } = useQuery({
+    const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['products-checkout'],
         queryFn: async () => {
-            const res = await publicAxios.get('/get-card')
+            const res = await publicAxios.get(`/get-card?email=${user?.email}`)
             return res.data
         }
     })
@@ -21,16 +21,29 @@ const CheckOut = () => {
     if (error) return 'An error has occurred: ' + error.message
     refetch()
 
+  
+    const Discount = (products.discount)
+    const Total = (products.count)
+    const payAmount = (products.totalPay)
+    const payable = parseFloat((payAmount * Total) / 100)
+    const DiscountTotal = payable.toFixed(2)
+    const pay = (payAmount - DiscountTotal).toFixed(2)
+    const currentDate = new Date();
+
     const handelCheckOut = () => {
         const checkOutData = {
-            mainId: products.map(item => item?.mainId)
+            mainId: products?.product.map(item => item?.mainId),
+            email: user?.email,
+            pay,
+            date: currentDate
         }
         console.log(checkOutData);
         publicAxios.patch(`/update-card?email=${user?.email}`, checkOutData)
-            .then(res => {
-                console.log(res.data);
+            .then( () => {
                 toast.success('checkout product!')
             })
+
+            refetch()
     }
 
     return (
@@ -49,11 +62,11 @@ const CheckOut = () => {
                     </tr>
                 </thead>
                 {
-                    products.map(product => <tbody key={product._id} className="block md:table-row-group text-black">
+                    products?.product.map(product => <tbody key={product._id} className="block md:table-row-group text-black">
                         <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
 
                             <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
-                            </span><div className="flex items-center">
+                            </span><div className="flex justify-center">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
                                             <img src={product?.photo} alt="Avatar Tailwind CSS Component" />
@@ -71,8 +84,27 @@ const CheckOut = () => {
                         </tr>
                     </tbody>)
                 }
+                <tfoot className=" ">
+                    <tr className="bg-gray-300 border border-grey-500 text-black md:border-none block md:table-row">
+
+                        <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Total:
+                        </span>Total:</td>
+
+                        <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span></td>
+
+                        <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Quantity</span>{Total}</td>
+
+                        <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Discount :</span>Discount: {Discount} %</td>
+
+                        <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Selling_price</span>
+                            <h1>Price:{payAmount}</h1> <br />
+                            <h1>Pay:{pay}</h1>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
-            <div className=" text-center mt-5 md:text-right lg:text-right md:mr-10 lg:mr-10 md:mt-10 lg:mt-10">
+
+            <div className=" text-center mt-5 md:text-right lg:text-right md:mr-10 lg:mr-10 mt-5">
                 <button onClick={handelCheckOut} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
             </div>
             <Toaster

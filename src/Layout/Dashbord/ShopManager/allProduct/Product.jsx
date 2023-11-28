@@ -69,7 +69,7 @@ console.log(getStore);
                         <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
 
                             <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
-                            </span><div className="flex items-center">
+                            </span><div className="flex justify-center">
                                     <div className="avatar">
                                         <div className="mask mask-squircle w-12 h-12">
                                             <img src={product?.photo} alt="Avatar Tailwind CSS Component" />

@@ -3,28 +3,41 @@ import useAuth from "../../../../Hooks/useAuth";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import toast, { Toaster } from "react-hot-toast";
+import { useEffect, useState } from "react";
 
 
 const Product_Section = () => {
-    const { user } = useAuth()
-    const publicAxios = usePublicAxios()
-    const { isPending, error, refetch, data: products } = useQuery({
-        queryKey: ['products-collection'],
-        queryFn: async () => {
-            const res = await publicAxios.get(`/shop-products/${user?.email}`)
-            return res.data
-        }
-    })
-    if (isPending) return 'Loading...'
-    if (error) return 'An error has occurred: ' + error.message
-    refetch()
 
-    const handelCheckOut = (id) => {
-        
+    // TODO : search function problem
+
+    const { user } = useAuth()
+    const [product, setProduct] = useState([])
+    const [products, setProducts] = useState([])
+    const publicAxios = usePublicAxios()
+    const [search , setSearch] = useState()
+
+
+    useEffect(()=>{
+       publicAxios.get(`/shop-products/${user?.email}`)
+       .then(res => {
+        setProduct(res.data)
+        setProducts(res.data)
+       })
+    },[publicAxios , user?.email])
+
+    const handelCheckOut = (item) => {
+
+        const {product_name,sellingPrice ,photo,discount,} = item ;
+
         const checkOutData = {
-            mainId: id
+            mainId: item._id,
+            product_name,
+            sellingPrice,
+            photo,
+            discount,
+            email: user?.email
         }
-        console.log(checkOutData);
+
         publicAxios.post('/checkOut-card', checkOutData)
             .then(res => {
                 console.log(res.data);
@@ -35,9 +48,18 @@ const Product_Section = () => {
             })
     }
 
+    const handelSearch = (e) => {
+        e.preventDefault();
+        const searchText = e.target.data.value
+        setSearch(searchText)
+    }
     return (
-
-        <table className="min-w-full border-collapse block md:table">
+        <div>
+            <form onSubmit={handelSearch} className=" m-5">
+                <input type="text" name="data" id="" />
+                <input className=" btn btn-sm bg-blue-600 " type="submit" value="Search" />
+            </form>
+            <table className="min-w-full border-collapse block md:table">
             <thead className="block md:table-header-group">
                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-center block md:table-cell">id</th>
@@ -55,7 +77,7 @@ const Product_Section = () => {
                         <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">ID:</span>{product._id}</td>
 
                         <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
-                        </span><div className="flex items-center">
+                        </span><div className="flex justify-center">
                                 <div className="avatar">
                                     <div className="mask mask-squircle w-12 h-12">
                                         <img src={product?.photo} alt="Avatar Tailwind CSS Component" />
@@ -73,7 +95,7 @@ const Product_Section = () => {
 
                         <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell">
                             <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                            <button onClick={() => handelCheckOut(product?._id)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
+                            <button onClick={() => handelCheckOut(product)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
                         </td>
                     </tr>
 
@@ -87,6 +109,7 @@ const Product_Section = () => {
             }
 
         </table>
+        </div>
     );
 };
 
