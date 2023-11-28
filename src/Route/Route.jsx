@@ -54,7 +54,7 @@ const router = createBrowserRouter([
       errorElement: <ErrorPage />,
       children: [
         {
-          path: '/dashboard/add',
+          path: '/dashboard',
           element: <Added />,
         },
         {

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
 
 const Dashboard = () => {
@@ -22,29 +22,29 @@ const Dashboard = () => {
                         {
                             isAdmin?.isAdmin ?
                                   <ul className=" menu text-black">
-                                  <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
-                                  <li><NavLink to={'/dashboard/manage'}>Manage Shop</NavLink></li>
-                                  <li><NavLink to={'/dashboard/item'}>Manage Item</NavLink></li>
-                                  <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
-                                  <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
+                                  <li><Link to={'/dashboard/Admin'}>Admin home</Link></li>
+                                  <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
+                                  <li><Link to={'/dashboard/item'}>Manage Item</Link></li>
+                                  <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
+                                  <li><Link to={'/dashboard/Users'}>All user</Link></li>
                                </ul>
                                :
                             <ul className=" menu text-black">
                                <li>Shop Manager</li>
-                            <li><NavLink to={'/dashboard/add'}>Add Product</NavLink></li>
-                            <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
-                            <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
-                            <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
-                            <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
-                            <li><NavLink to={'/dashboard/Summary'}>Summary</NavLink></li>
+                            <li><Link to={'/dashboard'}>Add Product</Link></li>
+                            <li><Link to={'/dashboard/product'}>All Product</Link></li>
+                            <li><Link to={'/dashboard/Collection'}>Sales-Collection</Link></li>
+                            <li><Link to={'/dashboard/checkOut'}>Check-Out</Link></li>
+                            <li><Link to={'/dashboard/subscription'}>subscription</Link></li>
+                            <li><Link to={'/dashboard/Summary'}>Summary</Link></li>
                             </ul>
                         }
 
                         {/* shear content */}
                         <div className="divider bg-blue-400"></div>
                         <ul className=" menu text-black ">
-                            <li><NavLink to={'/'}>Home</NavLink></li>
-                            <li><NavLink to={'/'}>Contact</NavLink></li>
+                            <li><Link to={'/'}>Home</Link></li>
+                            <li><Link to={'/'}>Contact</Link></li>
                         </ul>
 
                     </div>
@@ -56,21 +56,21 @@ const Dashboard = () => {
                     {
                         isAdmin?.isAdmin ?
                               <ul className=" menu text-black">
-                              <li><NavLink to={'/dashboard/Admin'}>Admin home</NavLink></li>
-                              <li><NavLink to={'/dashboard/manage'}>Manage Shop</NavLink></li>
-                              <li><NavLink to={'/dashboard/item'}>Manage Item</NavLink></li>
-                              <li><NavLink to={'/dashboard/Review'}>Manage Booking</NavLink></li>
-                              <li><NavLink to={'/dashboard/Users'}>All user</NavLink></li>
+                              <li><Link to={'/dashboard/Admin'}>Admin home</Link></li>
+                              <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
+                              <li><Link to={'/dashboard/item'}>Manage Item</Link></li>
+                              <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
+                              <li><Link to={'/dashboard/Users'}>All user</Link></li>
                            </ul>
                            :
                         <ul className=" menu text-black">
                             <li className=" mb-3">Shop Manager</li>
-                            <li><NavLink  to={'/dashboard/add'}>Add Product</NavLink></li>
-                            <li><NavLink to={'/dashboard/product'}>All Product</NavLink></li>
-                            <li><NavLink to={'/dashboard/Collection'}>Sales-Collection</NavLink></li>
-                            <li><NavLink to={'/dashboard/checkOut'}>Check-Out</NavLink></li>
-                            <li><NavLink to={'/dashboard/subscription'}>subscription</NavLink></li>
-                            <li><NavLink to={'/dashboard/Summary'}>Summary</NavLink></li>
+                            <li><Link  to={'/dashboard'}>Add Product</Link></li>
+                            <li><Link to={'/dashboard/product'}>All Product</Link></li>
+                            <li><Link to={'/dashboard/Collection'}>Sales-Collection</Link></li>
+                            <li><Link to={'/dashboard/checkOut'}>Check-Out</Link></li>
+                            <li><Link to={'/dashboard/subscription'}>subscription</Link></li>
+                            <li><Link to={'/dashboard/Summary'}>Summary</Link></li>
 
                         </ul>
                     }
@@ -78,8 +78,8 @@ const Dashboard = () => {
                     {/* shear content */}
                     <div className="divider bg-blue-400"></div>
                     <ul className=" menu text-black ">
-                        <li><NavLink to={'/'}>Home</NavLink></li>
-                        <li><NavLink to={'/'}>Contact</NavLink></li>
+                        <li><Link to={'/'}>Home</Link></li>
+                        <li><Link to={'/'}>Contact</Link></li>
                     </ul>
 
                 </div>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import useAuth from "../../../../Hooks/useAuth";
 import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
+import { Helmet } from "react-helmet-async";
 
 
 
@@ -22,6 +23,10 @@ const Added = () => {
 
     return (
         <div >
+            <Helmet>
+                <title>IMS || Dashboard</title>
+                <link rel="canonical" />
+            </Helmet>
             {
               data?.length != 0 ?
                     <div className=" flex flex-col md:flex-row lg:flex-row justify-center text-center md:justify-between lg:justify-between mt-20 md:mx-12 lg:mx-20 border-y-2 border-r-2 border-black border-solid ">

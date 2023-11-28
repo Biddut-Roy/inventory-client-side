@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
 import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const CreateShop = () => {
     const publicAxios = usePublicAxios()
@@ -33,6 +34,12 @@ const CreateShop = () => {
             }
 
             const menuRes = await SecureAxios.post('/shop-admin', shopDetails);
+    
+            if (menuRes.data.store) {
+                toast.success('Already have a account')
+                reset();
+                navigate('/')
+            }
             if (menuRes.data._id) {
                 Swal.fire("Your Shop Created");
                 reset();
@@ -96,6 +103,10 @@ const CreateShop = () => {
                 </div>
 
             </form>
+            <Toaster
+                position="top-center"
+                reverseOrder={false}
+            />
         </div>
     );
 };
