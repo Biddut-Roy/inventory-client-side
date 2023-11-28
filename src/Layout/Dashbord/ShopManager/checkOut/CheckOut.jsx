@@ -3,7 +3,8 @@ import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
-
+import { jsPDF } from "jspdf";
+import "jspdf-autotable";
 
 
 
@@ -21,11 +22,13 @@ const CheckOut = () => {
     if (error) return 'An error has occurred: ' + error.message
     refetch()
 
-  
+console.log(products.product);
+const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
+
     const Discount = (products.discount)
     const Total = (products.count)
-    const payAmount = (products.totalPay)
-    const payable = parseFloat((payAmount * Total) / 100)
+    const payAmount = (products.totalPay).toFixed(2)
+    const payable = parseFloat((payAmount * Discount) / 100)
     const DiscountTotal = payable.toFixed(2)
     const pay = (payAmount - DiscountTotal).toFixed(2)
     const currentDate = new Date();
@@ -35,21 +38,32 @@ const CheckOut = () => {
             mainId: products?.product.map(item => item?.mainId),
             email: user?.email,
             pay,
-            date: currentDate
+            date: currentDate,
+            cost,
+
         }
-        console.log(checkOutData);
+
         publicAxios.patch(`/update-card?email=${user?.email}`, checkOutData)
-            .then( () => {
+            .then(() => {
                 toast.success('checkout product!')
             })
 
-            refetch()
+        refetch()
     }
 
-    return (
-        <div className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
+    const exportPdf = async () => {
+        const doc = new jsPDF({ orientation: "landscape" });
 
-            <table className="min-w-full border-collapse block md:table">
+        doc.autoTable({
+            html: "#my-table",
+        });
+
+        doc.save("mypdf.pdf");
+    };
+
+    return (
+        <div id="pdf-content" className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
+            <table id="my-table" className="min-w-full border-collapse block md:table">
                 <thead className="block md:table-header-group">
                     <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
 
@@ -62,7 +76,7 @@ const CheckOut = () => {
                     </tr>
                 </thead>
                 {
-                    products?.product.map(product => <tbody key={product._id} className="block md:table-row-group text-black">
+                    products.product.map(product => <tbody key={product._id} className="block md:table-row-group text-black">
                         <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
 
                             <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
@@ -104,8 +118,8 @@ const CheckOut = () => {
                 </tfoot>
             </table>
 
-            <div className=" text-center mt-5 md:text-right lg:text-right md:mr-10 lg:mr-10 mt-5">
-                <button onClick={handelCheckOut} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
+            <div className=" text-center  md:text-right lg:text-right md:mr-10 lg:mr-10 mt-5">
+                <button onClick={() => { exportPdf() , handelCheckOut(); }} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout /></button>
             </div>
             <Toaster
                 position="top-center"

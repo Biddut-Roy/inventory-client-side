@@ -6,12 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
-import useStore from "../../../../Hooks/useStore";
+
 
 const Product = () => {
     const { user } = useAuth()
     const publicAxios = usePublicAxios()
-    const [getStore ] = useStore()
+ 
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-products'],
         queryFn: async () => {
@@ -21,8 +21,10 @@ const Product = () => {
     })
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
-console.log(getStore);
+
     refetch()
+
+
     const handelDelete = (id) => {
         Swal.fire({
             title: 'Are you sure?',
