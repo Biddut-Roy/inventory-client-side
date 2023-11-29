@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import useAuth from "../../../../Hooks/useAuth";
 import { useEffect } from "react";
 import { useState } from "react";
 import { PieChart, Pie,  Cell, ResponsiveContainer, Legend } from 'recharts';
 import moment from 'moment';
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 const COLORS = ['#0088FE', '#FFBB28', '#FF8042'];
@@ -28,14 +28,14 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const Summary = () => {
     const { user } = useAuth()
-    const publicAxios = usePublicAxios()
+    const SecureAxios = useAxiosSecure()
     const [sell, setSell] = useState()
     const [currentPage, SetCurrentPage] = useState(0)
     const [itemLength, setItemLength] = useState(0)
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await publicAxios.get(`/sell-data/${user?.email}?page=${currentPage}&size=${4}`);
+                const response = await SecureAxios.get(`/sell-data/${user?.email}?page=${currentPage}&size=${4}`);
                 const data = response.data;
                 setSell(data?.result)
                 setItemLength(data?.dataLength)
@@ -45,7 +45,7 @@ const Summary = () => {
         };
 
         fetchData();
-    }, [publicAxios, user?.email, currentPage])
+    }, [SecureAxios, user?.email, currentPage])
 
     const totalSell = sell?.reduce((acc, current) => {
         const total = current.pay || 0;
@@ -64,7 +64,7 @@ const Summary = () => {
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-products'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/shop-products/${user?.email}`)
+            const res = await SecureAxios.get(`/shop-products/${user?.email}`)
             return res.data
         }
     })

@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import { NavLink } from "react-router-dom";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useEffect } from "react";
 import { useState } from "react";
 import { PieChart, Pie,  Cell, ResponsiveContainer, Legend } from 'recharts';
@@ -28,7 +27,7 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 
 const Admin_Summary = () => {
-    const publicAxios = usePublicAxios()
+
     const SecureAxios = useAxiosSecure()
     const {Admin} = useADminData();
     const [sell, setSell] = useState()
@@ -39,7 +38,7 @@ const Admin_Summary = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await publicAxios.get(`/all-shop-data?page=${currentPage}&size=${4}`);
+                const response = await SecureAxios.get(`/all-shop-data?page=${currentPage}&size=${4}`);
                 const data = response.data;
                 setSell(data?.pagination)
                 setItemLength(data?.dataLength)
@@ -48,12 +47,12 @@ const Admin_Summary = () => {
             }
         };
         fetchData();
-    }, [publicAxios , currentPage])
+    }, [SecureAxios , currentPage])
 
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['all-product'],
         queryFn: async () => {
-            const res = await publicAxios.get('/all-product')
+            const res = await SecureAxios.get('/all-product')
             return res.data
         }
     })

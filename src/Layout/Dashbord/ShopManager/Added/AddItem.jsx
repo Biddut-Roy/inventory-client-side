@@ -7,10 +7,12 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 const AddItem = () => {
     const navigate = useNavigate()
+    const SecureAxios = useAxiosSecure()
     const { user } = useAuth()
     const publicAxios = usePublicAxios()
     const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
@@ -24,13 +26,13 @@ const AddItem = () => {
     const { isPending, error, refetch, data: store = {} } = useQuery({
         queryKey: ['shop-data'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/shop-data/${user?.email}`)
+            const res = await SecureAxios.get(`/shop-data/${user?.email}`)
             return res.data
         }
     })
 
     const [isLimit, setIsLimit] = useState(store?.limit)
-    if (isPending) return 'Loading...'
+    if (isPending) return 'Loading...loddddddddd'
     if (error) return 'An error has occurred: ' + error.message
     refetch()
     const Limit = parseInt(store?.limit - 1)
@@ -71,7 +73,7 @@ const AddItem = () => {
                     description: data.Description,
                     photo: res.data?.data?.display_url
                 }
-                publicAxios.post('/add-product', productData)
+                SecureAxios.post('/add-product', productData)
                     .then(res => {
                         if (res.data._id) {
                             reset()

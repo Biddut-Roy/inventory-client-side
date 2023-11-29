@@ -1,22 +1,21 @@
 import { MdOutlineDelete } from "react-icons/md";
 import { GrDocumentUpdate } from "react-icons/gr";
 import useAuth from "../../../../Hooks/useAuth";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import toast, { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 const Product = () => {
     const { user } = useAuth()
-    const publicAxios = usePublicAxios()
-
+    const SecureAxios = useAxiosSecure()
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-products'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/shop-products/${user?.email}`)
+            const res = await SecureAxios.get(`/shop-products/${user?.email}`)
             return res.data
         }
     })
@@ -37,7 +36,7 @@ const Product = () => {
             confirmButtonText: 'Yes, Delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                publicAxios.delete(`/delete-product/${id}?count=1&email=${user?.email}`)
+                SecureAxios.delete(`/delete-product/${id}?count=1&email=${user?.email}`)
                     .then(res => {
                         console.log(res.data);
                         if (res.data.deletedCount > 0) {

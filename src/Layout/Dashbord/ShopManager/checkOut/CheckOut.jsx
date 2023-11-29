@@ -1,21 +1,21 @@
 import { MdOutlineShoppingCartCheckout } from "react-icons/md";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../../Hooks/useAuth";
 import toast, { Toaster } from "react-hot-toast";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 
 const CheckOut = () => {
     const { user } = useAuth()
-    const publicAxios = usePublicAxios()
+    const SecureAxios = useAxiosSecure()
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['products-checkout'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/get-card?email=${user?.email}`)
+            const res = await SecureAxios.get(`/get-card?email=${user?.email}`)
             return res.data
         }
     })
@@ -44,7 +44,7 @@ const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
 
         }
 
-        publicAxios.patch(`/update-card?email=${user?.email}`, checkOutData)
+        SecureAxios.patch(`/update-card?email=${user?.email}`, checkOutData)
             .then(() => {
                 toast.success('checkout product!')
             })

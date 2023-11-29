@@ -1,9 +1,9 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import useAuth from "../../../../Hooks/useAuth";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 
@@ -15,19 +15,19 @@ const CheckOutFrom = () => {
     const stripe = useStripe()
     const elements = useElements()
     const [transactionId, setTransactionId] = useState('')
-    const axiosPublic = usePublicAxios()
+    const SecureAxios = useAxiosSecure()
     const navigate = useNavigate()
     const { money } = useParams();
     useEffect(() => {
         if (money > 0) {
-            axiosPublic.post('/create-payment-intent', { price: money })
+            SecureAxios.post('/create-payment-intent', { price: money })
                 .then(res => {
                     console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 })
         }
 
-    }, [axiosPublic, money])
+    }, [SecureAxios, money])
 
     const income = parseInt(money)
     let limit = 0;
@@ -80,7 +80,6 @@ const CheckOutFrom = () => {
             console.log(" payment error");
         }
         else {
-            console.log("payment indent", paymentIntent);
             if (paymentIntent.status === 'succeeded') {
                 setTransactionId(paymentIntent.id);
                 const payment = {
@@ -92,7 +91,7 @@ const CheckOutFrom = () => {
                 }
                 console.log(payment.menuItemIds);
 
-                axiosPublic.post('/payment-update', payment)
+                SecureAxios.post('/payment-update', payment)
                     .then(res => {
                         if (res.data?.result?.insertedId) {
                             Swal.fire({

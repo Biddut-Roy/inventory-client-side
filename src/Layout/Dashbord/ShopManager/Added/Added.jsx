@@ -1,18 +1,18 @@
 import { Link } from "react-router-dom";
 import useAuth from "../../../../Hooks/useAuth";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 
 const Added = () => {
     const { user } = useAuth()
-    const publicAxios = usePublicAxios()
+    const SecureAxios = useAxiosSecure()
     const { isPending, refetch, error, data } = useQuery({
         queryKey: ['products-add'],
         queryFn: async () => {
-            const res = await publicAxios.get(`/shop-products/${user?.email}`)
+            const res = await SecureAxios.get(`/shop-products/${user?.email}`)
             return res.data
         }
     })

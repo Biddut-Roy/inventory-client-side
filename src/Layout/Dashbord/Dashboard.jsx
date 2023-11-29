@@ -22,11 +22,9 @@ const Dashboard = () => {
                         {
                             isAdmin?.isAdmin ?
                                   <ul className=" menu text-black">
-                                  <li><Link>Admin home</Link></li>
+                                  <li>Admin home</li>
                                   <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
                                   <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
-                                  <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
-                                  <li><Link to={'/dashboard/Users'}>All user</Link></li>
                                </ul>
                                :
                             <ul className=" menu text-black">
@@ -56,11 +54,9 @@ const Dashboard = () => {
                     {
                         isAdmin?.isAdmin ?
                               <ul className=" menu text-black">
-                                <li><Link>Admin home</Link></li>
+                                <li>Admin home</li>
                               <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
                               <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
-                              <li><Link to={'/dashboard/Review'}>Manage Booking</Link></li>
-                              <li><Link to={'/dashboard/Users'}>All user</Link></li>
                            </ul>
                            :
                         <ul className=" menu text-black">

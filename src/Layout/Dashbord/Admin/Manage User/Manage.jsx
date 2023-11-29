@@ -1,6 +1,5 @@
 import { Toaster } from "react-hot-toast";
 import { AiTwotoneNotification } from "react-icons/ai";
-import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -9,13 +8,12 @@ import { useState } from "react";
 
 
 const Manage = () => {
-    const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
     const [emailValue, setEmailValue] = useState('');
     const { isPending, error, refetch, data: store = [] } = useQuery({
         queryKey: ['all-store'],
         queryFn: async () => {
-            const res = await publicAxios.get('/all-shop-data')
+            const res = await SecureAxios.get('/all-shop-data')
             return res.data?.result
         }
     })
