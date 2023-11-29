@@ -4,12 +4,14 @@ import usePublicAxios from "../../../../Hooks/usePublicAxios";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
+import { useState } from "react";
 
 
 
 const Manage = () => {
     const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
+    const [emailValue, setEmailValue] = useState('');
     const { isPending, error, refetch, data: store = [] } = useQuery({
         queryKey: ['all-store'],
         queryFn: async () => {
@@ -20,6 +22,7 @@ const Manage = () => {
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
     refetch()
+
 
 const handelSubmit = e =>{
     e.preventDefault();
@@ -33,7 +36,10 @@ const handelSubmit = e =>{
         console.log(response);
       })
 }
-
+const handleOpenModal = (product) => {
+    setEmailValue(product.email);
+    document.getElementById('my_modal_4').showModal();
+  };
 
     return (
         <div className="min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
@@ -73,12 +79,12 @@ const handelSubmit = e =>{
                             <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">description:</span>{product.description}</td>
 
                             <td className=" text-center mt-5  md:mr-10 lg:mr-10 md:mt-10 lg:mt-10">
-                                <button onClick={() => document.getElementById('my_modal_4').showModal()} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><AiTwotoneNotification /></button></td>
+                                <button  onClick={() => handleOpenModal(product)} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><AiTwotoneNotification /></button></td>
 
                             <dialog id="my_modal_4" className="modal  w-10/12 mx-auto">
                                 <div className="modal-box w-11/12 max-w-10/12 bg-slate-300">
                                     <form onSubmit={handelSubmit} className=" flex flex-col gap-5">
-                                        <input type="email" name="email" id="" defaultValue={product?.email} placeholder="email" className=" bg-blue-100 text-black border-solid border-2 p-5  font-bold" />
+                                        <input type="email" name="email" id="" value={emailValue} placeholder="email" className=" bg-blue-100 text-black border-solid border-2 p-5  font-bold" />
                                         <textarea name="message" id="" cols="20" rows="7" placeholder="type message" className=" bg-blue-100 text-black border-solid border-2 text-2xl "></textarea>
                                         <input type="submit" value="Send" className=" btn btn-sm bg-blue-700" />
                                     </form>

@@ -7,6 +7,7 @@ import { useState } from "react";
 import { PieChart, Pie,  Cell, ResponsiveContainer, Legend } from 'recharts';
 import useADminData from "../../../../Hooks/useADminData";
 import { AiTwotoneNotification } from "react-icons/ai";
+import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
 
 
 const COLORE = ['#0088FE', '#FFBB28', '#FF8042'];
@@ -28,10 +29,13 @@ const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, per
 
 const Admin_Summary = () => {
     const publicAxios = usePublicAxios()
+    const SecureAxios = useAxiosSecure()
     const {Admin} = useADminData();
     const [sell, setSell] = useState()
     const [currentPage, SetCurrentPage] = useState(0)
     const [itemLength, setItemLength] = useState(0)
+    const [emailValue, setEmailValue] = useState('')
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -45,8 +49,6 @@ const Admin_Summary = () => {
         };
         fetchData();
     }, [publicAxios , currentPage])
-    
-console.log(sell);
 
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['all-product'],
@@ -81,6 +83,24 @@ console.log(sell);
         { name: 'All Product', value: totalProduct },
         { name: 'Total Sale', value: totalSealCount },
       ];
+
+      const handelSubmit = e =>{
+        e.preventDefault();
+        const form = e.target ;
+        const mail = form.email.value;
+        const field = form.message.value;
+        const data ={mail , field}
+    
+        SecureAxios.post('/send-mail', data )
+          .then(function (response) {
+            console.log(response);
+          })
+    }
+
+      const handleOpenModal = (product) => {
+        setEmailValue(product.email);
+        document.getElementById('my_modal_4').showModal();
+      };
 
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
@@ -147,7 +167,23 @@ console.log(sell);
 
                                         <td className={ item?.roll == "admin" ? "p-2 font-bold md:border md:border-grey-500 bg-orange-600 block md:table-cell" : "p-2 md:border md:border-grey-500 text-left block md:table-cell"}><span className="inline-block w-1/3 md:hidden font-bold">Roll :</span>{item?.roll || " "}</td>
 
-                                        <td  className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><button className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><AiTwotoneNotification /></button></td>
+                                        <td className=" text-center mt-5  md:mr-10 lg:mr-10 md:mt-10 lg:mt-10">
+                                <button  onClick={() => handleOpenModal(item)} className="bg-blue-500 text-2xl md:text-3xl lg:text-4xl hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><AiTwotoneNotification /></button></td>
+
+                            <dialog id="my_modal_4" className="modal  w-10/12 mx-auto">
+                                <div className="modal-box w-11/12 max-w-10/12 bg-slate-300">
+                                    <form onSubmit={handelSubmit} className=" flex flex-col gap-5">
+                                        <input type="email" name="email" id="" value={emailValue} placeholder="email" className=" bg-blue-100 text-black border-solid border-2 p-5  font-bold" />
+                                        <textarea name="message" id="" cols="20" rows="7" placeholder="type message" className=" bg-blue-100 text-black border-solid border-2 text-2xl "></textarea>
+                                        <input type="submit" value="Send" className=" btn btn-sm bg-blue-700" />
+                                    </form>
+                                    <div className="modal-action">        
+                                        <form method="dialog">
+                                            <button className="btn">Close</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </dialog>
 
                                     </tr>)
                                 }
