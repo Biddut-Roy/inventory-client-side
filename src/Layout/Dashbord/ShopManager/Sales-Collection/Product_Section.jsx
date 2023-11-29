@@ -10,15 +10,13 @@ import { useState } from "react";
 
 const Product_Section = () => {
 
-    // TODO : search function problem
-
     const { user } = useAuth()
     const SecureAxios = useAxiosSecure()
-    const [search , setSearch]= useState(null)
+    const [search , setSearch]= useState('')
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-pro'],
         queryFn: async () => {
-            const res = await SecureAxios.get(`/shop-products/${user?.email}?search=${search}`)
+            const res = await SecureAxios.get(`/shop-product/${user?.email}?search=${search}`)
             return res.data
         }
     })

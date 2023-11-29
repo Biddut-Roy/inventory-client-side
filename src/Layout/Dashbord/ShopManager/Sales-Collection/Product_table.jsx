@@ -3,7 +3,8 @@ import { MdOutlineShoppingCartCheckout } from "react-icons/md";
 import PropTypes from 'prop-types';
 
 const Product_table = ({ product, handelCheckOut , outOffStock }) => {
-   const {photo ,_id , product_name , quantity , discount , sellingPrice} = product
+   const {photo , _id , product_name , quantity , discount , sellingPrice} = product
+
     return (
         <tbody className="block md:table-row-group text-black">
             <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
