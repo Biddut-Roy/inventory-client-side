@@ -1,9 +1,7 @@
 
 import { useForm } from "react-hook-form"
-
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
 import GoogleLogin from "./Social Login/GoogleLogin";
 import usePublicAxios from "../../Hooks/usePublicAxios";
 import useAuth from "../../Hooks/useAuth";
@@ -85,7 +83,6 @@ const Register = () => {
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center md:w-1/2 lg:text-left">
                         <h1 className="text-5xl font-bold">Register!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
                     <div className="card md:w-1/2   max-w-sm shadow-2xl bg-base-100">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
