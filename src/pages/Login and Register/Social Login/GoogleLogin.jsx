@@ -43,8 +43,8 @@ const GoogleLogin = () => {
                                 }
                             });
                 publicAxios.post("/users", userData)
-                    .then((result) => {
-                        console.log(result.data);
+                    .then(() => {
+
                         // if (result.data) {
                             
                         // }

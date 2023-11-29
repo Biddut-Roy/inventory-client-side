@@ -19,6 +19,7 @@ import Summary from "../Layout/Dashbord/ShopManager/Sales Summary/Summary";
 import Manage from "../Layout/Dashbord/Admin/Manage User/Manage";
 import Admin_Summary from "../Layout/Dashbord/Admin/Summary/Admin_Summary";
 import AdminRoute from "./AdminRoute";
+import ShopAdminRoute from "./ShopAdminRoute";
 
 
 
@@ -57,39 +58,39 @@ const router = createBrowserRouter([
       children: [
         {
           path: '/dashboard',
-          element: <Added />,
+          element: <ShopAdminRoute><Added /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/added',
-          element: <AddItem />,
+          element: <ShopAdminRoute><AddItem /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/product',
-          element: <Product />,
+          element: <ShopAdminRoute><Product /></ShopAdminRoute>,
         },
         {
           path: `/dashboard/updateProduct/:id`,
-          element: <Update />,
+          element: <ShopAdminRoute><Update /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/Collection',
-          element: <Product_Section />,
+          element: <ShopAdminRoute><Product_Section /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/checkOut',
-          element: <CheckOut />,
+          element: <ShopAdminRoute><CheckOut /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/subscription',
-          element: <Subscription />,
+          element: <ShopAdminRoute><Subscription /></ShopAdminRoute>,
         },
         {
           path: '/dashboard/subscription/:money',
-          element: <Payment /> ,
+          element: <ShopAdminRoute><Payment /></ShopAdminRoute> ,
         },
         {
           path: '/dashboard/Summary',
-          element: <Summary /> ,
+          element: <ShopAdminRoute><Summary /></ShopAdminRoute> ,
         },
         
         // Admin section
