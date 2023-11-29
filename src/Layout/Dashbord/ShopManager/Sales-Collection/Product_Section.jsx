@@ -27,7 +27,7 @@ const Product_Section = () => {
     }, [publicAxios, user?.email])
 
 
-console.log(product);
+
     const handelCheckOut = (item) => {
 
         const { product_name, sellingPrice, photo, discount, cost } = item;

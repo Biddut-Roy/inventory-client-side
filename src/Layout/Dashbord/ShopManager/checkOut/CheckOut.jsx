@@ -23,7 +23,7 @@ const CheckOut = () => {
     if (error) return 'An error has occurred: ' + error.message
     refetch()
 
-console.log(products.product);
+
 const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
 
     const Discount = (products.discount)

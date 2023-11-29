@@ -57,7 +57,9 @@ const Summary = () => {
         return total + itemCost;
     }, 0);
 
-    const Profit = (totalSell - totalCost).toFixed(2);
+    const tax = parseFloat((totalSell * 7.5) / 100)
+
+    const Profit = ((totalSell - totalCost) - tax).toFixed(2);
 
     const { isPending, error, refetch, data: products = [] } = useQuery({
         queryKey: ['shop-products'],
@@ -70,11 +72,12 @@ const Summary = () => {
     if (error) return 'An error has occurred: ' + error.message
 
     refetch()
+
     const totalInvestAmount = products?.reduce((total, item) => {
-        const saleAmount = item.saleCount * (item.cost * item.quantity);
+        const saleAmount = (item.cost * (item.quantity + item.saleCount));
         return total + saleAmount;
     }, 0);
-console.log(sell);
+
     const count = itemLength;
     const itemPerPage = 4;
     const numberOfPage = Math.ceil(count / itemPerPage)
@@ -164,7 +167,7 @@ console.log(sell);
                     </div>
                     {/* chart */}
                     <div className=" min-h-screen">
-                       <div className=" h-[65%] mx-auto">
+                       <div className=" h-[70%] mx-auto">
                        <ResponsiveContainer width="100%" height="100%">
                             <PieChart width={400} height={400}>
                                 <Pie
