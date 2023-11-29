@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import useAdmin from "../../Hooks/useAdmin";
+import useAuth from "../../Hooks/useAuth";
 
 const Dashboard = () => {
     const [isSidebarOpen, setSidebarOpen] = useState(true);
     const  [isAdmin] = useAdmin()
+    const {logOut} = useAuth()
     const toggleSidebar = () => {
         setSidebarOpen(!isSidebarOpen);
     };
@@ -74,8 +76,8 @@ const Dashboard = () => {
                     {/* shear content */}
                     <div className="divider bg-blue-400"></div>
                     <ul className=" menu text-black ">
-                        <li><Link to={'/'}>Home</Link></li>
-                        <li><Link to={'/'}>Contact</Link></li>
+                        <li className=" btn btn-sm bg-blue-600 my-5 text-black"><Link to={'/'}>Home</Link></li>
+                        <li className=" btn btn-sm bg-red-500 text-black"><Link onClick={() => logOut()}>Logout</Link></li>
                     </ul>
 
                 </div>

@@ -82,7 +82,7 @@ const handleOpenModal = (product) => {
                             <dialog id="my_modal_4" className="modal  w-10/12 mx-auto">
                                 <div className="modal-box w-11/12 max-w-10/12 bg-slate-300">
                                     <form onSubmit={handelSubmit} className=" flex flex-col gap-5">
-                                        <input type="email" name="email" id="" value={emailValue} placeholder="email" className=" bg-blue-100 text-black border-solid border-2 p-5  font-bold" />
+                                        <input type="email" name="email" readOnly defaultValue={emailValue} placeholder="email" className=" bg-blue-100 text-black border-solid border-2 p-5  font-bold" />
                                         <textarea name="message" id="" cols="20" rows="7" placeholder="type message" className=" bg-blue-100 text-black border-solid border-2 text-2xl "></textarea>
                                         <input type="submit" value="Send" className=" btn btn-sm bg-blue-700" />
                                     </form>
