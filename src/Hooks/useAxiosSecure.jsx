@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const secureAxios = axios.create({
-  // baseURL:'https://inventory-shop-management.vercel.app',
+  baseURL:'https://inventory-shop-management.vercel.app',
   // baseURL: 'http://localhost:5000',
 })
 
