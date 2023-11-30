@@ -31,7 +31,7 @@ const Product_table = ({ product, handelCheckOut , outOffStock }) => {
                     quantity <= 0 ?
                         <td  className="p-2 md:border md:border-grey-500 text-center block md:table-cell">
                             <span className="inline-block w-1/3 md:hidden font-bold">Actions</span>
-                            <button onClick={()=>outOffStock(quantity)} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout />lol</button>
+                            <button onClick={()=>outOffStock(quantity)} className="bg-blue-500 hover:bg-red-500 text-white font-bold py-1 px-2 border border-blue-500 rounded"><MdOutlineShoppingCartCheckout />lol</button>
                         </td>
                         :
                         <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell">

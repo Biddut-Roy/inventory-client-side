@@ -8,13 +8,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 
 
-const Product_Section = () => {
 
+const Product_Section = () => {
+    const [refetch , setRefetch] = useState(null)
     const { user } = useAuth()
     const SecureAxios = useAxiosSecure()
     const [search , setSearch]= useState('')
-    const { isPending, error, refetch, data: products = [] } = useQuery({
-        queryKey: ['shop-pro'],
+    const { isPending, error, data: products = [] } = useQuery({
+        queryKey: ['shop-pro',refetch],
         queryFn: async () => {
             const res = await SecureAxios.get(`/shop-product/${user?.email}?search=${search}`)
             return res.data
@@ -23,10 +24,8 @@ const Product_Section = () => {
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
 
-    refetch()
-
     const handelCheckOut = (item) => {
-        refetch()
+        setRefetch(new Date().getTime())
         const { product_name, sellingPrice, photo, discount, cost } = item;
         const checkOutData = {
             mainId: item._id,
