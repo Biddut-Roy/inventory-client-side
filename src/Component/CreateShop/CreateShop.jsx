@@ -7,6 +7,7 @@ import useAuth from "../../Hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
+
 const CreateShop = () => {
     const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
@@ -14,6 +15,7 @@ const CreateShop = () => {
     const { user } = useAuth()
     const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
     const { register, handleSubmit, reset } = useForm()
+
 
 
     const onSubmit = async (data) => {

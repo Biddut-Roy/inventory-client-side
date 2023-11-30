@@ -48,14 +48,13 @@ const Summary = () => {
         fetchData();
     }, [SecureAxios, user?.email, currentPage])
 
-    console.log(sell)
+
 
     const totalSell = sell?.reduce((acc, current) => {
         const total = current.pay || 0;
         return acc + total;
     }, 0);
 
-    console.log(totalSell)
     const totalCost = sell?.reduce((total, item) => {
         const itemCost = item.cost || 0;
         return total + itemCost;
@@ -93,8 +92,6 @@ const Summary = () => {
         { name: 'Total Invest', value: totalInvestAmount },
         { name: 'Total Profit', value: Profit },
       ];
-
-      console.log(sell)
 
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">

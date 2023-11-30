@@ -4,7 +4,6 @@ import useAuth from "../../../../Hooks/useAuth";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import toast, { Toaster } from "react-hot-toast";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
@@ -31,14 +30,14 @@ const AddItem = () => {
         }
     })
 
-    const [isLimit, setIsLimit] = useState(store?.limit)
+
     if (isPending) return 'Loading...loddddddddd'
     if (error) return 'An error has occurred: ' + error.message
     refetch()
+
     const Limit = parseInt(store?.limit - 1)
 
     const onSubmit = async (data) => {
-        setIsLimit(Limit)
         const cost = parseInt(data?.Cost)
         const profit = parseFloat(data?.Profit_Margin)
         const SellingPrice = parseFloat(cost + ((cost * 7.5) / 100) + ((cost * profit) / 100))
@@ -48,7 +47,7 @@ const AddItem = () => {
         const currentDay = currentDate.getDate();
         const currentDateStr = `${currentYear}/${currentMonth}/${currentDay}`;
 
-        if (isLimit <= 0) {
+        if (store?.limit<= 0) {
             toast.error("Product Added Limited. Subscription please")
         } else { 
             const imgFile = { image: data.image[0] }
