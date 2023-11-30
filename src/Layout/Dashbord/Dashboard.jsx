@@ -76,8 +76,8 @@ const Dashboard = () => {
                     {/* shear content */}
                     <div className="divider bg-blue-400"></div>
                     <ul className=" menu text-black ">
-                        <li className=" btn btn-sm bg-blue-600 my-5 text-black"><Link to={'/'}>Home</Link></li>
-                        <li className=" btn btn-sm bg-red-500 text-black"><Link onClick={() => logOut()}>Logout</Link></li>
+                        <button><li className=" btn btn-sm bg-blue-600 my-5 text-black"><Link to={'/'}>Home</Link></li></button>
+                        <li className=" btn btn-sm bg-red-500 text-black"><Link to={'/'} onClick={() => logOut()}>Logout</Link></li>
                     </ul>
 
                 </div>

@@ -90,6 +90,8 @@ const Summary = () => {
         { name: 'Total Profit', value: Profit },
       ];
 
+      console.log(sell)
+
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
             <Helmet>

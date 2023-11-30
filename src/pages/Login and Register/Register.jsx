@@ -1,4 +1,5 @@
-
+import Lottie from "lottie-react";
+import registerLoti from '../../../public/Registation.json'
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -21,55 +22,55 @@ const Register = () => {
     } = useForm()
 
     const onSubmit = async (data) => {
-        const imgFile = { image : data.image[0]}
+        const imgFile = { image: data.image[0] }
         console.log(imgFile);
         const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
             headers: { "content-type": "multipart/form-data" }
         })
-        if (res.data.success){
+        if (res.data.success) {
             createUser(data?.email, data?.password)
-            .then(() => {
-                userUpdateProfile(data?.firstName, res.data?.data?.display_url)
-                    .then(() => {
-                        const userData = {
-                            email: data?.email,
-                            name: data?.firstName,
-                        }
-                        publicAxios.post('/users' , userData)
-                            .then(res => {
-                                console.log(res.data);
-                                if (res.data._id) {
-                                    reset()
-                                    navigate("/CreateShop")
-                                    Swal.fire({
-                                        title: "registered successfully ",
-                                        showClass: {
-                                            popup: `
+                .then(() => {
+                    userUpdateProfile(data?.firstName, res.data?.data?.display_url)
+                        .then(() => {
+                            const userData = {
+                                email: data?.email,
+                                name: data?.firstName,
+                            }
+                            publicAxios.post('/users', userData)
+                                .then(res => {
+                                    console.log(res.data);
+                                    if (res.data._id) {
+                                        reset()
+                                        navigate("/CreateShop")
+                                        Swal.fire({
+                                            title: "registered successfully ",
+                                            showClass: {
+                                                popup: `
                                                 animate__animated
                                                 animate__fadeInUp
                                                 animate__faster
                                             `
-                                        },
-                                        hideClass: {
-                                            popup: `
+                                            },
+                                            hideClass: {
+                                                popup: `
                                             animate__animated
                                             animate__fadeOutDown
                                             animate__faster
                                         `
-                                        }
-                                    });
+                                            }
+                                        });
 
-                                }
-                            })
+                                    }
+                                })
 
-                    })
-                    .catch(() => { })
-            })
-            .catch((error) => {
-                console.log(error.message);
-            });
+                        })
+                        .catch(() => { })
+                })
+                .catch((error) => {
+                    console.log(error.message);
+                });
         }
-       
+
     }
 
 
@@ -81,8 +82,8 @@ const Register = () => {
             </Helmet>
             <div className="hero min-h-screen w-11/12 mx-auto bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
-                    <div className="text-center md:w-1/2 lg:text-left">
-                        <h1 className="text-5xl font-bold">Register!</h1>
+                    <div className="text-center lg:w-1/2 lg:text-left">
+                        <Lottie className=" lg:ml-36 h-36 lg:h-2/6 w-10/12" animationData={registerLoti} loop={true} />
                     </div>
                     <div className="card md:w-1/2   max-w-sm shadow-2xl bg-base-100">
                         <form onSubmit={handleSubmit(onSubmit)} className="card-body">
@@ -139,4 +140,4 @@ const Register = () => {
     );
 };
 
-export default Register ;
+export default Register;

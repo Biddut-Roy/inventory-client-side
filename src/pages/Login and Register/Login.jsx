@@ -5,6 +5,8 @@ import Swal from 'sweetalert2';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../Hooks/useAuth';
 import GoogleLogin from './Social Login/GoogleLogin';
+import lock from "../../../public/lock.json"
+import Lottie from "lottie-react";
 
 
 const Login = () => {
@@ -65,9 +67,8 @@ const Login = () => {
             </Helmet>
         <div className="hero min-h-screen w-11/12 mx-auto bg-base-200">
             <div className="hero-content flex-col lg:flex-row-reverse">
-                <div className="text-center md:w-1/2 lg:text-left">
-                    <h1 className="text-5xl font-bold">Login now!</h1>
-                   
+            <div className="text-center lg:w-1/2 lg:text-left">
+                    <Lottie className=" lg:ml-28 h-36 md:h-44 lg:h-96 w-10/12" animationData={lock} loop={true} />
                 </div>
                 <div className="card md:w-1/2   max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handelLogin} className="card-body">
