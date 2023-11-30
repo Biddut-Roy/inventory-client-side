@@ -28,10 +28,10 @@ const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
 
     const Discount = (products.discount)
     const Total = (products.count)
+
     const payAmount = (products.totalPay).toFixed(2)
-    const payable = parseFloat((payAmount * Discount) / 100)
-    const DiscountTotal = payable.toFixed(2)
-    const pay = (payAmount - DiscountTotal).toFixed(2)
+    const DiscountTotal = parseFloat((payAmount * Discount) / 100).toFixed(2)
+    const pay = (payAmount - DiscountTotal)
     const currentDate = new Date();
 
     const handelCheckOut = () => {

@@ -26,9 +26,8 @@ const Product_Section = () => {
     refetch()
 
     const handelCheckOut = (item) => {
-
+        refetch()
         const { product_name, sellingPrice, photo, discount, cost } = item;
-
         const checkOutData = {
             mainId: item._id,
             product_name,
@@ -52,7 +51,7 @@ const Product_Section = () => {
                     toast.success('add product successful')
                 }
             })
-            refetch()
+           
     }
 
     const outOffStock = (quantity) => {

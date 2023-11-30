@@ -32,6 +32,7 @@ const Summary = () => {
     const [sell, setSell] = useState()
     const [currentPage, SetCurrentPage] = useState(0)
     const [itemLength, setItemLength] = useState(0)
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -47,17 +48,20 @@ const Summary = () => {
         fetchData();
     }, [SecureAxios, user?.email, currentPage])
 
+    console.log(sell)
+
     const totalSell = sell?.reduce((acc, current) => {
         const total = current.pay || 0;
         return acc + total;
     }, 0);
 
+    console.log(totalSell)
     const totalCost = sell?.reduce((total, item) => {
         const itemCost = item.cost || 0;
         return total + itemCost;
     }, 0);
 
-    const tax = parseFloat((totalSell * 7.5) / 100)
+    const tax = parseFloat((totalCost * 7.5) / 100)
 
     const Profit = ((totalSell - totalCost) - tax).toFixed(2);
 
@@ -104,7 +108,7 @@ const Summary = () => {
                     <NavLink >
                         <div className="stat text-gray-700  border-2 bg-orange-300 rounded-lg">
                             <div className="stat-title text-black" >Total Sale</div>
-                            <div className="stat-value">{totalSell} $</div>
+                            <div className="stat-value text-2xl">{totalSell} $</div>
 
                         </div>
                     </NavLink>
@@ -113,7 +117,7 @@ const Summary = () => {
                         <div className="stat text-gray-700 border-2 bg-orange-300 rounded-lg">
 
                             <div className="stat-title text-black">Total Invest</div>
-                            <div className="stat-value">{totalInvestAmount} $</div>
+                            <div className="stat-value text-2xl">{totalInvestAmount} $</div>
 
                         </div>
                     </NavLink>
@@ -121,7 +125,7 @@ const Summary = () => {
                     <NavLink >
                         <div className="stat text-gray-700 border-2 bg-orange-300 rounded-lg">
                             <div className="stat-title text-black">Total Profit</div>
-                            <div className="stat-value">{Profit} $</div>
+                            <div className="stat-value text-2xl">{Profit} $</div>
 
                         </div>
                     </NavLink>
@@ -151,7 +155,9 @@ const Summary = () => {
                                         {moment(item.date).format("DD : MMMM : YYYY")}
                                         </td>
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Profit :</span>{(item.pay - item.cost).toFixed(2)}</td>
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Profit :</span>
+                                        {((item.pay - item.cost)-((item.cost * 7.5) / 100)).toFixed(2)}
+                                        </td>
 
                                     </tr>)
                                 }
