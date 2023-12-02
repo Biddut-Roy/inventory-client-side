@@ -27,7 +27,7 @@ const CheckOut = () => {
 const cost = products?.product?.reduce((acc, current) => acc + current.cost, 0);
 
     const Discount = (products.discount)
-    const Total = (products.count)
+    const Total = (products.product.length)
 
     const payAmount = (products.totalPay).toFixed(2)
     const DiscountTotal = parseFloat((payAmount * Discount) / 100).toFixed(2)

@@ -2,19 +2,26 @@
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../../Hooks/useAuth";
 import useAdmin from "../../../Hooks/useAdmin";
+import useStoreAdmin from "../../../Hooks/useStoreAdmin";
 
 
 const Navbar = () => {
     const [isAdmin]  = useAdmin()
     const { user, logOut } = useAuth()
+    const [isStoreAdmin] =useStoreAdmin()
+    console.log(isStoreAdmin);
  
     const list = <>
         <li> <NavLink className={({ isActive, isPending }) =>
             isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/"}>Home</NavLink> </li>
         {
-            user && !isAdmin?.isAdmin ? 
+            user && !isAdmin?.isAdmin ?
+            isStoreAdmin?.isStoreAdmin?
                 <li> <NavLink className={({ isActive, isPending }) =>
                     isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/dashboard"}>Dashboard</NavLink> </li>
+                    :
+                <li> <NavLink className={({ isActive, isPending }) =>
+                    isPending ? "pending" : isActive ? "bg-blue-800" : ""} to={"/createShop"}>Dashboard</NavLink> </li>
                 :
                 isAdmin?.isAdmin ? 
                 <li> <NavLink className={({ isActive, isPending }) =>
