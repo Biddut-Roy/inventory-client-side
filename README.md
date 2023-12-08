@@ -1,7 +1,7 @@
 # IMS- Project : https://shorturl.at/nDHJ6
 
 </br > </br > 
-## Use Technology :
+## Used Technology :
 - React/Taildwind/javascript/Html/CSS
 
 </br >  </br > 
