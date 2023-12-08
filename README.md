@@ -1,11 +1,10 @@
 # IMS- Project : https://shorturl.at/nDHJ6
 
 </br >
-##  Use Tecnology:
-
+## Use Technology :
 - React/Taildwind/javascript/Html/CSS
 
-</br > </br >
+</br > 
 ## Project Feature :
 - A common user can create his own shop.
 - Can add and manage 3 products normally.
