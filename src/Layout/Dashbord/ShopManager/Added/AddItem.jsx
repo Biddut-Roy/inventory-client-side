@@ -31,7 +31,7 @@ const AddItem = () => {
     })
 
 
-    if (isPending) return 'Loading...loddddddddd'
+    if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
     refetch()
 
@@ -72,6 +72,7 @@ const AddItem = () => {
                     description: data.Description,
                     photo: res.data?.data?.display_url
                 }
+                console.log(productData)
                 SecureAxios.post('/add-product', productData)
                     .then(res => {
                         if (res.data._id) {

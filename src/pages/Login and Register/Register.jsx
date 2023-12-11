@@ -23,7 +23,7 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         const imgFile = { image: data.image[0] }
-        console.log(imgFile);
+
         const res = await publicAxios.post(IMG_IMG_HOSTING, imgFile, {
             headers: { "content-type": "multipart/form-data" }
         })

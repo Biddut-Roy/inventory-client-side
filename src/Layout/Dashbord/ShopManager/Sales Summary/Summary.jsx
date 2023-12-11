@@ -130,7 +130,7 @@ const Summary = () => {
                 </div>
                 {/* table */}
                 <div className=" grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 w-11/12 mx-auto">
-                    <div className="border-solid border-2">
+                    <div className="">
                         <table className="min-w-full border-collapse block md:table ">
                             <thead className="block md:table-header-group">
                                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">

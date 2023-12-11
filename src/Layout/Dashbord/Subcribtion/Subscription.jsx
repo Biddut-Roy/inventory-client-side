@@ -33,7 +33,7 @@ const Subscription = () => {
                         <div className="stat text-gray-700 border-2 bg-orange-300 rounded-lg">
                             <div className="stat-title text-black">Gold</div>
                             <div className="stat-value">50$</div>
-                            <div className="stat-desc text-black text-xl">1500 Product</div>
+                            <div className="stat-desc text-black text-xs">1500 Product</div>
                         </div>
                     </NavLink>
 

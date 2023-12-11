@@ -1,4 +1,4 @@
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { AiTwotoneNotification } from "react-icons/ai";
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
@@ -31,6 +31,9 @@ const handelSubmit = e =>{
 
     SecureAxios.post('/send-mail', data )
       .then(function (response) {
+        if(response.status === 200 ){
+            toast.success("mail sending success")
+        }
         console.log(response);
       })
 }

@@ -8,7 +8,9 @@ const Product_table = ({ product, handelCheckOut , outOffStock }) => {
     return (
         <tbody className="block md:table-row-group text-black">
             <tr className="bg-gray-300 border border-grey-500 md:border-none block md:table-row">
-                <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">ID:</span>{_id}</td>
+
+            <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block md:hidden font-bold">ID:</span>{_id}</td>
+
 
                 <td className="p-2 md:border md:border-grey-500 text-center block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">
                 </span><div className="flex justify-center">

@@ -9,7 +9,7 @@ const Navbar = () => {
     const [isAdmin]  = useAdmin()
     const { user, logOut } = useAuth()
     const [isStoreAdmin] =useStoreAdmin()
-    console.log(isStoreAdmin);
+
  
     const list = <>
         <li> <NavLink className={({ isActive, isPending }) =>
@@ -72,7 +72,7 @@ const Navbar = () => {
                         <NavLink to={"/login"}><button className=" btn btn-primary bg-blue-800 btn-sm">Login</button></NavLink>
 
                 }
-               
+              
             </div>
         </div>
     );
