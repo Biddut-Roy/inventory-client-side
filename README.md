@@ -11,5 +11,5 @@
 - Add more than 3 products and purchase subscription
 - By adding the product to the invoice, you can checkout and provide the receipt in PDF format
 - All users can talk through live chat
-- Admin Dashboard Show all Store current Products quantity and Sellcount. 
+- Admin Dashboard Show all Store current Products quantity and Sell count. 
 
