@@ -20,6 +20,7 @@ import Manage from "../Layout/Dashbord/Admin/Manage User/Manage";
 import Admin_Summary from "../Layout/Dashbord/Admin/Summary/Admin_Summary";
 import AdminRoute from "./AdminRoute";
 import ShopAdminRoute from "./ShopAdminRoute";
+import LiveChatRoom from "../Component/LiveChatRoom/LiveChatRoom";
 
 
 
@@ -92,6 +93,10 @@ const router = createBrowserRouter([
           path: '/dashboard/Summary',
           element: <ShopAdminRoute><Summary /></ShopAdminRoute> ,
         },
+        {
+          path: '/dashboard/Room',
+          element: <ShopAdminRoute><LiveChatRoom /></ShopAdminRoute> ,
+        },
         
         // Admin section
         {
@@ -101,6 +106,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/admin/Summary',
           element: <AdminRoute><Admin_Summary /></AdminRoute> ,
+        },
+        {
+          path: '/dashboard/admin/Room',
+          element: <AdminRoute><LiveChatRoom /></AdminRoute> ,
         },
        
       ]
