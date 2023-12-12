@@ -48,7 +48,7 @@ const Summary = () => {
         fetchData();
     }, [SecureAxios, user?.email, currentPage])
 
-
+console.log(sell);
 
     const totalSell = sell?.reduce((acc, current) => {
         const total = current.pay || 0;
@@ -93,6 +93,8 @@ const Summary = () => {
         { name: 'Total Profit', value: Profit },
       ];
 
+
+
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
             <Helmet>
@@ -135,7 +137,7 @@ const Summary = () => {
                             <thead className="block md:table-header-group">
                                 <tr className="border border-grey-500 md:border-none block md:table-row absolute -top-full md:top-auto -left-full md:left-auto  md:relative ">
 
-                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Name</th>
+                                    <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Seller</th>
                                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Selling Date</th>
                                     <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Profit</th>
 
@@ -146,7 +148,7 @@ const Summary = () => {
                                 {
                                     sell?.map(item => <tr key={item._id} className="bg-blue-300 border border-grey-500 md:border-none block md:table-row">
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span>product?.product_name</td>
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name</span>Shop Admin</td>
 
                                         <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Date:</span>
                                         {moment(item.date).format("DD : MMMM : YYYY")}
@@ -201,14 +203,6 @@ const Summary = () => {
 };
 
 export default Summary;
-
-
-
-
-
-
-
-
 
 
 

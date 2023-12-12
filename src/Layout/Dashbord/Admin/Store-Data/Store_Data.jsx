@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Helmet } from "react-helmet-async";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure";
-import { iterate } from "localforage";
+
 
 
 const Store_Data = () => {
@@ -41,14 +41,7 @@ data.forEach(entry => {
 
 const finalResult = Object.values(result);
 
-console.log(finalResult);
     
- 
-
-
-
-
-
     return (
         <div className=" min-h-screen bg-gradient-to-r from-green-200 via-green-300 to-blue-500">
             <Helmet>
@@ -81,7 +74,7 @@ console.log(finalResult);
                                         {item.userEmail}
                                         </td>
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Sell: :</span>{item.totalSaleCount}</td>
+                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Sell:</span>{item.totalSaleCount}</td>
 
                                         <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Quantity:</span>{item.totalQuantity}</td>
 
