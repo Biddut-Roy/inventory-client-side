@@ -1,4 +1,4 @@
-// import usePublicAxios from "../../Hooks/usePublicAxios";
+import usePublicAxios from "../../Hooks/usePublicAxios";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
@@ -9,22 +9,22 @@ import toast, { Toaster } from "react-hot-toast";
 
 
 const CreateShop = () => {
-    // const publicAxios = usePublicAxios()
+    const publicAxios = usePublicAxios()
     const SecureAxios = useAxiosSecure()
     const navigate = useNavigate()
     const { user } = useAuth()
-    // const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
+    const IMG_IMG_HOSTING = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_API_KEY_IMGBB}`
     const { register, handleSubmit, reset } = useForm()
 
 
 
     const onSubmit = async (data) => {
-        // const imagFile = { image: data.image[0] }
-        // const res = await publicAxios.post(IMG_IMG_HOSTING, imagFile, {
-        //     headers: { "content-type": "multipart/form-data" }
-        // })
+        const imagFile = { image: data.image[0] }
+        const res = await publicAxios.post(IMG_IMG_HOSTING, imagFile, {
+            headers: { "content-type": "multipart/form-data" }
+        })
 
-        // if (res.data.success) {
+        if (res.data.success) {
             const shopDetails = {
                 roll: "shop-admin" ,
                 description: data.description,
@@ -32,7 +32,7 @@ const CreateShop = () => {
                 email: user?.email,
                 shop_name: data.Name,
                 name: user?.displayName,
-                image: "https://i.ibb.co/QQpC4V1/proinvnew.webp"
+                image: res.data?.data.display_url
             }
 
             const menuRes = await SecureAxios.post('/shop-admin', shopDetails);
@@ -47,7 +47,7 @@ const CreateShop = () => {
                 reset();
                 navigate('/dashboard')
             }
-        // }
+        }
     }
 
     return (
