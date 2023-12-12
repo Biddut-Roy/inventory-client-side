@@ -27,6 +27,7 @@ const Dashboard = () => {
                                   <li>Admin home</li>
                                   <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
                                   <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
+                                  <li><Link to={'/dashboard/admin/store_data'}>Store-data</Link></li>
                                   <li><Link to={'/dashboard/admin/Room'}>Chat-Room</Link></li>
                                </ul>
                                :
@@ -61,6 +62,7 @@ const Dashboard = () => {
                                 <li>Admin home</li>
                               <li><Link to={'/dashboard/manage'}>Manage Shop</Link></li>
                               <li><Link to={'/dashboard/admin/Summary'}>Sale-Summary</Link></li>
+                              <li><Link to={'/dashboard/admin/store_data'}>Store-data</Link></li>
                               <li><Link to={'/dashboard/admin/Room'}>Chat-Room</Link></li>
                            </ul>
                            :

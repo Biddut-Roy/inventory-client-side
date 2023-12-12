@@ -21,6 +21,7 @@ import Admin_Summary from "../Layout/Dashbord/Admin/Summary/Admin_Summary";
 import AdminRoute from "./AdminRoute";
 import ShopAdminRoute from "./ShopAdminRoute";
 import LiveChatRoom from "../Component/LiveChatRoom/LiveChatRoom";
+import Store_Data from "../Layout/Dashbord/Admin/Store-Data/Store_Data";
 
 
 
@@ -106,6 +107,10 @@ const router = createBrowserRouter([
         {
           path: '/dashboard/admin/Summary',
           element: <AdminRoute><Admin_Summary /></AdminRoute> ,
+        },
+        {
+          path: '/dashboard/admin/store_data',
+          element: <AdminRoute><Store_Data /></AdminRoute> ,
         },
         {
           path: '/dashboard/admin/Room',

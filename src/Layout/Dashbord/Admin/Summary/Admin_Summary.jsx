@@ -58,7 +58,6 @@ const Admin_Summary = () => {
     })
     if (isPending) return 'Loading...'
     if (error) return 'An error has occurred: ' + error.message
-
     refetch()
 
     const totalProduct = products?.reduce((total, item) => {
@@ -137,7 +136,7 @@ const Admin_Summary = () => {
 
                 </div>
                 {/* table */}
-                <div className=" flex flex-col w-11/12 mx-auto">
+                <div className=" flex flex-col w-11/12 md:w-full lg:w-11/12 mx-auto">
                     <div className="border-solid border-2">
                         <table className="min-w-full border-collapse block md:table ">
                             <thead className="block md:table-header-group">
@@ -158,7 +157,7 @@ const Admin_Summary = () => {
 
                                         <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Name :</span>{item.name}</td>
 
-                                        <td className="p-2 md:border md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Email :</span>
+                                        <td className="p-2 md:border  md:border-grey-500 text-left block md:table-cell"><span className="inline-block w-1/3 md:hidden font-bold">Email :</span>
                                         {item.email}
                                         </td>
 
@@ -187,7 +186,10 @@ const Admin_Summary = () => {
                                     </tr>)
                                 }
                             </tbody>
-                            {
+                         
+                        </table>
+                        <div className="">
+                          {
                                 pages.map(page => <button
                                     onClick={() => SetCurrentPage(page)}
                                     className={currentPage === page ? " btn btn-sm text-blue-700 my-5 mx-3" : "btn btn-sm  my-5 mx-3"}
@@ -195,8 +197,7 @@ const Admin_Summary = () => {
                                     {page}
                                 </button>)
                             }
-                        </table>
-
+                          </div>
                     </div>
                     {/* chart */}
                     <div className=" min-h-screen">
