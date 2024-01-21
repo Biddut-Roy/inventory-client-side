@@ -5,7 +5,7 @@
 - React/Taildwind/javascript/Html/CSS/socket.io
 
 </br >  </br > 
-## Project Feature :
+## Project Feature:
 - A common user can create his own shop.
 - Can add and manage 3 products normally.
 - Add more than 3 products and purchase subscription
